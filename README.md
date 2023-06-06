@@ -16,7 +16,7 @@ Reggit, the registration app for events @Komponent
 2. Navigate into the directory: `cd reggit`
 3. Install dependencies:
    - For the mobile app, navigate into the `mobile` directory and run `yarn install`
-   - For the web admin panel, navigate into the `admin-panel` directory and run `yarn install`
+   - For the web admin panel, navigate into the `web` directory and run `yarn install`
 
 ## Run
 
