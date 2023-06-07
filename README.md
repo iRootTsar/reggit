@@ -23,6 +23,8 @@ Web: React with TS and TailwindCSS
 
 ## Run
 
+Postgresql & Docker for local db:
+
 If Metro bundler server doesn't automatically start you can run;
 Metro bundler server: "cd mobile" -> "npx react-native start" or "npx react-native start --reset-cache" to start Metro bundler server.
 This is mostly used for android app when run with the command below.
