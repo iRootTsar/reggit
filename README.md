@@ -23,7 +23,9 @@ Web: React with TS and TailwindCSS
 
 ## Run
 
-Postgresql & Docker for local db:
+Postgresql & Docker for local db: "docker-compose -f docker-compose.yml up" and to remove "docker-compose -f docker-compose.yml down"
+
+.net api: "cd api" -> "dotnet watch" for hot reload.
 
 If Metro bundler server doesn't automatically start you can run;
 Metro bundler server: "cd mobile" -> "npx react-native start" or "npx react-native start --reset-cache" to start Metro bundler server.

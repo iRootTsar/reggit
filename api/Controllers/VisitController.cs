@@ -32,8 +32,8 @@ public class VisitController : ControllerBase
 
 public record Visitor
 {
-    string Name; 
+    public string Name; 
 
-    string Email;
+    public string Email;
 
 }
