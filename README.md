@@ -2,6 +2,9 @@
 
 Reggit, the registration app for events @Komponent
 
+Mobile: React-native with TS and Nativewind (Tailwindcss)
+Web: React with TS and TailwindCSS
+
 ## Table of Contents
 
 1. [Installation](#installation)
@@ -20,8 +23,9 @@ Reggit, the registration app for events @Komponent
 
 ## Run
 
-Metro bundler server: "cd mobile" -> "npx react-native start" to start Metro bundler server. This is mostly used for android app
-when run with the command below.
+If Metro bundler server doesn't automatically start you can run;
+Metro bundler server: "cd mobile" -> "npx react-native start" or "npx react-native start --reset-cache" to start Metro bundler server.
+This is mostly used for android app when run with the command below.
 
 Android: npx react-native run-android
 
