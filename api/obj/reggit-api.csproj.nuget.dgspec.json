@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/oysteinvikane/Desktop/reggit/api/reggit-api.csproj": {}
+    "/Users/vladimircivilgin/Documents/GitHub/reggit/api/reggit-api.csproj": {}
   },
   "projects": {
-    "/Users/oysteinvikane/Desktop/reggit/api/reggit-api.csproj": {
+    "/Users/vladimircivilgin/Documents/GitHub/reggit/api/reggit-api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/oysteinvikane/Desktop/reggit/api/reggit-api.csproj",
+        "projectUniqueName": "/Users/vladimircivilgin/Documents/GitHub/reggit/api/reggit-api.csproj",
         "projectName": "reggit-api",
-        "projectPath": "/Users/oysteinvikane/Desktop/reggit/api/reggit-api.csproj",
-        "packagesPath": "/Users/oysteinvikane/.nuget/packages/",
-        "outputPath": "/Users/oysteinvikane/Desktop/reggit/api/obj/",
+        "projectPath": "/Users/vladimircivilgin/Documents/GitHub/reggit/api/reggit-api.csproj",
+        "packagesPath": "/Users/vladimircivilgin/.nuget/packages/",
+        "outputPath": "/Users/vladimircivilgin/Documents/GitHub/reggit/api/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/oysteinvikane/.nuget/NuGet/NuGet.Config"
+          "/Users/vladimircivilgin/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
