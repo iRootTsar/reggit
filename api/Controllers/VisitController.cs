@@ -21,7 +21,8 @@ public class VisitController : ControllerBase
         return Enumerable.Range(1, 5).Select(index => new Visitor
         {
             Name = "Bjartmar",
-            Email = "vlad@komponent.no"
+            Email = "vlad@komponent.no",
+            Telefon = 00000000,
 
         })
         .ToArray();
@@ -35,5 +36,7 @@ public record Visitor
     public string Name; 
 
     public string Email;
+
+    public int Telefon;
 
 }
