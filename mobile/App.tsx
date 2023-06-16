@@ -1,14 +1,38 @@
-import React from 'react';
-import {Text, View} from 'react-native';
+import * as React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import WelcomeScreen from './src/screens/Welcome';
+import RegistrationScreen from './src/screens/Registration';
+import LabelPreviewScreen from './src/screens/LabelPreview';
 
-function App(): JSX.Element {
-  return (
-    <View className="flex-1 items-center justify-center bg-black">
-      <Text className="text-white text-md font-bold mt-2">
-        Open up App.js to start working on your app!
-      </Text>
-    </View>
-  );
+type RootStackParamList = {
+    Hjem: {message: string} | undefined;
+    Registration: undefined;
+    LabelPreview: undefined;
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
+
+function App() {
+    return (
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen
+                    name="Hjem"
+                    component={WelcomeScreen}
+                    options={({route}) => ({title: route.params?.message})}
+                />
+                <Stack.Screen
+                    name="Registration"
+                    component={RegistrationScreen}
+                />
+                <Stack.Screen
+                    name="LabelPreview"
+                    component={LabelPreviewScreen}
+                />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
 }
 
 export default App;

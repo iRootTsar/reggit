@@ -18,25 +18,18 @@ public class VisitController : ControllerBase
     [HttpGet(Name = "GetVisitors")]
     public IEnumerable<Visitor> Get()
     {
-        return Enumerable.Range(1, 5).Select(index => new Visitor
+        return Enumerable.Range(1, 2).Select(index => new Visitor
         {
             Name = "Bjartmar",
             Email = "vlad@komponent.no",
-            Telefon = 00000000,
-
         })
         .ToArray();
     }
-
-
 }
 
 public record Visitor
 {
-    public string Name; 
+    public string? Name; 
 
-    public string Email;
-
-    public int Telefon;
-
+    public string? Email;
 }
