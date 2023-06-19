@@ -21,7 +21,8 @@ public class VisitorRepository
             Name = dto.Name,
             Email = dto.Email,
             Organization = dto.Organization,
-            Phone = dto.Phone
+            Phone = dto.Phone,
+            ImageURL = dto.ImageURL
         };
         _context.Visitors.Add(visitor);
         await _context.SaveChangesAsync();
@@ -29,7 +30,7 @@ public class VisitorRepository
     }
 
     public async Task Delete(int id)
-    { 
+    {
         await _context.Visitors.Where(x => x.Id == id).ExecuteDeleteAsync();
     }
 
@@ -49,6 +50,7 @@ public class VisitorRepository
             .SetProperty(prop => prop.Name, visitorUpdate.Name)
             .SetProperty(prop => prop.Email, visitorUpdate.Email)
             .SetProperty(prop => prop.Organization, visitorUpdate.Organization)
-            .SetProperty(prop => prop.Phone, visitorUpdate.Phone));
+            .SetProperty(prop => prop.Phone, visitorUpdate.Phone)
+            .SetProperty(prop => prop.ImageURL, visitorUpdate.ImageURL));
     }
 }

@@ -9,4 +9,6 @@ public record Visitor
     public string? Phone { get; set; }
     public string? Organization { get; set; }
 
+    public string? ImageURL { get; set; }
+
 }
