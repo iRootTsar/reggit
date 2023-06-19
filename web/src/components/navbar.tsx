@@ -11,8 +11,8 @@ interface NavigationItem {
 }
 
 const navigation: NavigationItem[] = [
-    {name: 'Login', href: '/', current: false},
-    {name: 'Home', href: '/home', current: false},
+    {name: 'Login', href: '/login', current: false},
+    {name: 'Home', href: '/', current: false},
 ];
 
 function classNames(...classes: string[]): string {
@@ -28,25 +28,20 @@ const Navbar: FunctionComponent = () => {
     };
 
     return (
-        <>
-            <Disclosure as="nav" className="bg-gray-800">
+        <div className="bg-gray-800 sticky top-0 z-50">
+            <Disclosure as="nav">
                 {({open}) => (
                     <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                         <div className="relative flex h-16 items-center justify-between">
                             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                                 <div className="flex flex-shrink-0 items-center">
                                     <img
-                                        className="block h-8 w-auto lg:hidden"
-                                        src={logo}
-                                        alt="Reggit"
-                                    />
-                                    <img
                                         className="hidden h-8 w-auto lg:block"
                                         src={logo}
                                         alt="Reggit"
                                     />
                                 </div>
-                                <div className="hidden sm:ml-6 sm:block">
+                                <div className="sm:ml-6 sm:block">
                                     <div className="flex space-x-4">
                                         {navigation.map(item => (
                                             <Link
@@ -75,7 +70,7 @@ const Navbar: FunctionComponent = () => {
                 )}
             </Disclosure>
             <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
-        </>
+        </div>
     );
 };
 

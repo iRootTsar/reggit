@@ -1,7 +1,7 @@
 import {FunctionComponent, Fragment} from 'react';
 import {Dialog, Transition} from '@headlessui/react';
 
-import picture from '../images/babayaga.jpg';
+import picture from '../images/dummyimages/babayaga.jpg';
 
 interface SidebarProps {
     open: boolean;
@@ -44,7 +44,7 @@ const Sidebar: FunctionComponent<SidebarProps> = ({open, setOpen}) => {
                                 leaveFrom="translate-x-0"
                                 leaveTo="translate-x-full">
                                 <Dialog.Panel className="w-screen max-w-md pt-48">
-                                    <div className="flex h-4/6 flex-col overflow-y-scroll bg-gray-200 py-6 shadow-xl">
+                                    <div className="flex h-4/6 flex-col overflow-y-scroll bg-gray-300 py-6 shadow-xl">
                                         <div className="px-4 sm:px-6">
                                             <Dialog.Title className="text-center text-lg font-semibold leading-6 text-gray-900">
                                                 User Profile

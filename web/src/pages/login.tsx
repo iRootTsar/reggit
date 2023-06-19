@@ -8,7 +8,7 @@ function Login() {
     const handleLogin = () => {
         // your login logic here
         // after successful login:
-        navigate('/home');
+        navigate('/');
     };
 
     return (

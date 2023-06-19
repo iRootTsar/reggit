@@ -2,9 +2,10 @@ version: "3.1"
 
 services:
   db:
-    image: postgres
+    image: postgres:14.1-alpine
     restart: always
     environment:
+      POSTGRES_USER: reggit
       POSTGRES_PASSWORD: reggit
     volumes:
       - reggit-data:/var/lib/postgresql/data

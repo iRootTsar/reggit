@@ -1,4 +1,9 @@
+using api.Config;
+using dal;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// add config binder
 
 // Add services to the container.
 
@@ -6,6 +11,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.ConfigurePostgres(builder.Configuration);
 
 var app = builder.Build();
 
@@ -21,5 +27,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.Services.RunMigration<Dbcontext>();
 
 app.Run();
