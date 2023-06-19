@@ -8,41 +8,47 @@ namespace dal.repositories;
 
 public class VisitorRepository
 {
-    private readonly Dbcontext _db;
-    public VisitorRepository(Dbcontext db)
+    private readonly Dbcontext _context;
+    public VisitorRepository(Dbcontext context)
     {
-        _db = db;
+        _context = context;
     }
 
-    public Visitor Create(Visitor visitor)
+    public async Task<int> Create(CreateVisitorDTO dto)
     {
-        _db.Visitors.Add(visitor);
-        _db.SaveChanges();
-        return visitor;
+        Visitor visitor = new()
+        {
+            Name = dto.Name,
+            Email = dto.Email,
+            Organization = dto.Organization,
+            Phone = dto.Phone
+        };
+        _context.Visitors.Add(visitor);
+        await _context.SaveChangesAsync();
+        return visitor.Id;
     }
 
-    public Visitor Delete(int id)
-    {
-        var visitor = _db.Visitors.Find(id);
-        _db.Visitors.Remove(visitor);
-        _db.SaveChanges();
-        return visitor;
+    public async Task Delete(int id)
+    { 
+        await _context.Visitors.Where(x => x.Id == id).ExecuteDeleteAsync();
     }
 
-    public Visitor Get(int id)
+    public async Task<Visitor?> Get(int id)
     {
-        return _db.Visitors.Find(id);
+        return await _context.Visitors.FindAsync(id);
     }
 
-    public IEnumerable<Visitor> GetAll()
+    public async Task<IEnumerable<Visitor>> GetAll()
     {
-        return _db.Visitors.ToArray();
+        return await _context.Visitors.ToArrayAsync();
     }
 
-    public void Update(VisitorDTO visitor)
+    public async Task Update(VisitorUpdateDTO visitorUpdate)
     {
-        _db.Visitors.Update(visitor);
-        _db.SaveChanges();
-
+        await _context.Visitors.Where(x => x.Id == visitorUpdate.Id).ExecuteUpdateAsync(entity => entity
+            .SetProperty(prop => prop.Name, visitorUpdate.Name)
+            .SetProperty(prop => prop.Email, visitorUpdate.Email)
+            .SetProperty(prop => prop.Organization, visitorUpdate.Organization)
+            .SetProperty(prop => prop.Phone, visitorUpdate.Phone));
     }
 }

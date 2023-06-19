@@ -1,3 +1,4 @@
+using dal.DTO;
 using Microsoft.AspNetCore.Mvc;
 using dal.Models;
 using dal.repositories;
@@ -20,32 +21,27 @@ public class VisitController : ControllerBase
     }
 
     [HttpGet(Name = "GetVisitors")]
-    public IEnumerable<Visitor> GetVisitors()
+    public async Task<IEnumerable<Visitor>> GetVisitors()
     {
-        using var db = _repository.GetService<Dbcontext>();
-        return db.Visitors.ToArray();
+        return await _repository.GetAll();
     }
 
     [HttpGet("{id}", Name = "GetVisitor")]
-    public Visitor GetVisitor(int id)
+    public async Task<Visitor?> GetVisitor(int id)
     {
-        using var db = _repository.GetService<Dbcontext>();
-        return db.Visitors.Find(id);
+        return await _repository.Get(id);
     }
 
-    [HttpPost(Name = "CreateVisitor")]
-    public Visitor CreateVisitor(Visitor visitor)
+    [HttpPut(Name = "CreateVisitor")]
+    public async Task<int> CreateVisitor(CreateVisitorDTO createVisitorUpdate)
     {
-        using var db = _repository.GetService<Dbcontext>();
-        db.Visitors.Add(visitor);
-        db.SaveChanges();
-        return visitor;
+        return await _repository.Create(createVisitorUpdate);
     }
 
-    [HttpPut("{id}", Name = "UpdateVisitor")]
-    public Visitor UpdateVisitor(int id, Visitor visitor)
+    [HttpPost("", Name = "UpdateVisitor")]
+    public async Task UpdateVisitor(VisitorUpdateDTO visitorUpdate)
     {
-        _repository.Update(visitor);
+        await _repository.Update(visitorUpdate);
     }
 }
 
