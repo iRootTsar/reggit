@@ -1,29 +1,42 @@
 import {FunctionComponent, Fragment} from 'react';
 import {Dialog, Transition} from '@headlessui/react';
-
-import picture from '../images/dummyimages/babayaga.jpg';
+import {VisitService} from '../clients/reggit-api/index';
+import {Visitor} from 'src/clients/reggit-api/models/Visitor';
 
 interface SidebarProps {
     open: boolean;
     setOpen: (state: boolean) => void;
+    selectedVisitor: Visitor | undefined;
+    refreshTable: () => void;
 }
 
-interface UserData {
-    name: string;
-    email: string;
-    phone: string;
-    organization: string;
-    picture: string;
-}
+const Sidebar: FunctionComponent<SidebarProps> = ({
+    open,
+    setOpen,
+    selectedVisitor,
+    refreshTable,
+}) => {
+    const userData = selectedVisitor
+        ? {
+              name: selectedVisitor.name,
+              email: selectedVisitor.email,
+              phone: selectedVisitor.phone,
+              organization: selectedVisitor.organization,
+              imageURL: selectedVisitor.imageURL,
+          }
+        : undefined;
 
-const Sidebar: FunctionComponent<SidebarProps> = ({open, setOpen}) => {
-    // Static data
-    const userData: UserData = {
-        name: 'Jardani "John Wick" Jovonovich',
-        email: 'babayaga@forhire.com',
-        phone: '+1 666 666 666',
-        organization: 'Ruska Roma',
-        picture: picture,
+    // Function to handle delete person
+    const deleteVisitors = async (id: number) => {
+        VisitService.deleteVisitor(id)
+            .then(response => {
+                console.log(response);
+                setOpen(false);
+                refreshTable();
+            })
+            .catch(error => {
+                console.log(error);
+            });
     };
 
     return (
@@ -54,22 +67,39 @@ const Sidebar: FunctionComponent<SidebarProps> = ({open, setOpen}) => {
                                             <div className="flex flex-col items-center">
                                                 <img
                                                     className="w-38 h-38 rounded-full"
-                                                    src={userData.picture}
-                                                    alt={userData.name}
+                                                    src={
+                                                        userData?.imageURL ||
+                                                        'No image provided'
+                                                    }
+                                                    alt={
+                                                        userData?.name ||
+                                                        'No name provided'
+                                                    }
                                                 />
                                                 <h2 className="mt-4 text-2xl font-semibold text-gray-900">
-                                                    {userData.name}
+                                                    {userData?.name}
                                                 </h2>
                                                 <p className="text-sm text-gray-500">
-                                                    {userData.email}
+                                                    {userData?.email}
                                                 </p>
                                                 <p className="text-sm text-gray-500">
-                                                    {userData.phone}
+                                                    {userData?.phone}
                                                 </p>
                                                 <p className="text-sm text-gray-500">
-                                                    {userData.organization}
+                                                    {userData?.organization}
                                                 </p>
                                             </div>
+                                        </div>
+                                        <div className=" flex justify-center items-center">
+                                            <button
+                                                onClick={() =>
+                                                    deleteVisitors(
+                                                        selectedVisitor?.id?.toString() as unknown as number
+                                                    )
+                                                }
+                                                className=" m-2 w-48 py-2 bg-gray-700 hover:bg-gray-500 text-white font-bold rounded">
+                                                Delete
+                                            </button>
                                         </div>
                                     </div>
                                 </Dialog.Panel>

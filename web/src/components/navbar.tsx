@@ -2,7 +2,6 @@ import logo from '../images/Komponent_logo_RED_white.png';
 import {Link, useLocation} from 'react-router-dom';
 import {Disclosure} from '@headlessui/react';
 import {FunctionComponent, useState} from 'react';
-import Sidebar from '../components/sidebar';
 
 interface NavigationItem {
     name: string;
@@ -21,11 +20,6 @@ function classNames(...classes: string[]): string {
 
 const Navbar: FunctionComponent = () => {
     const location = useLocation();
-    const [sidebarOpen, setSidebarOpen] = useState(false);
-
-    const handleSidebarToggle = () => {
-        setSidebarOpen(!sidebarOpen);
-    };
 
     return (
         <div className="bg-gray-800 sticky top-0 z-50">
@@ -60,16 +54,10 @@ const Navbar: FunctionComponent = () => {
                                     </div>
                                 </div>
                             </div>
-                            <button
-                                onClick={handleSidebarToggle}
-                                className="text-gray-300 px-3 py-2 rounded-md text-sm font-medium">
-                                Open Sidebar
-                            </button>
                         </div>
                     </div>
                 )}
             </Disclosure>
-            <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
         </div>
     );
 };

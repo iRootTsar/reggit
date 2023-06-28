@@ -71,4 +71,21 @@ export class VisitService {
         });
     }
 
+    /**
+     * @param id
+     * @returns any Success
+     * @throws ApiError
+     */
+    public static deleteVisitor(
+        id: number,
+    ): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'DELETE',
+            url: '/Visit/{id}',
+            path: {
+                'id': id,
+            },
+        });
+    }
+
 }

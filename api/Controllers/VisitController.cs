@@ -43,5 +43,11 @@ public class VisitController : ControllerBase
     {
         await _repository.Update(visitorUpdate);
     }
+
+    [HttpDelete("{id}", Name = "DeleteVisitor")]
+    public async Task DeleteVisitor(int id)
+    {
+        await _repository.Delete(id);
+    }
 }
 

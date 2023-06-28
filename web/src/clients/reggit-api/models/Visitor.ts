@@ -4,8 +4,8 @@
 
 export type Visitor = {
     id?: number;
-    name?: string | null;
-    email?: string | null;
+    name: string;
+    email: string;
     phone?: string | null;
     organization?: string | null;
     imageURL?: string | null;

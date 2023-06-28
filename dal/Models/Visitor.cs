@@ -1,11 +1,16 @@
-namespace dal.Models;
+using System.ComponentModel.DataAnnotations;
 
+namespace dal.Models;
 
 public record Visitor
 {
     public int Id { get; set; }
-    public required string Name { get; init; }
-    public required string Email { get; init; }
+
+    [Required(ErrorMessage = "Name is required")]
+    public string Name { get; init; }
+
+    [Required(ErrorMessage = "Email is required")]
+    public string Email { get; init; }
     public string? Phone { get; set; }
     public string? Organization { get; set; }
 
