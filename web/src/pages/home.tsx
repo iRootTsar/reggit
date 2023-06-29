@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {VisitService} from '../clients/reggit-api/index';
 import {Visitor} from '../clients/reggit-api/models/Visitor';
-import Sidebar from 'src/components/sidebar';
+//import Sidebar from 'src/components/sidebar';
+import PopoutModal from 'src/components/popoutmodal';
 
 const Home: React.FC = () => {
     const [visits, setVisits] = useState([] as Visitor[]);
-    //const [loading, setLoading] = useState(false);
-    // create hook for loading visits
 
+    // create hook for loading visits
     const getVisits = async () => {
         // setLoading(true);
         VisitService.getVisitors()
@@ -26,12 +26,17 @@ const Home: React.FC = () => {
     // Selected visitor
     const [selectedVisitor, setSelectedVisitor] = useState<Visitor>();
 
-    const [sidebarOpen, setSidebarOpen] = useState(false);
+    // Sidebar
+    //const [sidebarOpen, setSidebarOpen] = useState(false);
+
+    // Popout modal
+    const [modalOpen, setModalOpen] = useState(false);
 
     useEffect(() => {
         getVisits();
     }, []);
 
+    // Function for refreshing table
     const fetchVisitorsAgain = () => {
         getVisits();
     };
@@ -52,8 +57,7 @@ const Home: React.FC = () => {
                     <thead className="sticky top-0 z-10 w-full text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr
                             className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                            onClick={() => setSelectedVisitor(selectedVisitor)} // set the selected visitor when a row is clicked
-                        >
+                            onClick={() => setSelectedVisitor(selectedVisitor)}>
                             <th scope="col" className="px-6 py-3">
                                 Picture
                             </th>
@@ -96,7 +100,8 @@ const Home: React.FC = () => {
                                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                                     onClick={() => {
                                         setSelectedVisitor(visitor);
-                                        setSidebarOpen(true);
+                                        //setSidebarOpen(true);
+                                        setModalOpen(true);
                                     }}>
                                     <td className=" px-2 py-4">
                                         <img
@@ -127,9 +132,11 @@ const Home: React.FC = () => {
                             ))}
                     </tbody>
                 </table>
-                <Sidebar
-                    open={sidebarOpen}
-                    setOpen={setSidebarOpen}
+                <PopoutModal
+                    //open={sidebarOpen}
+                    //setOpen={setSidebarOpen}
+                    open={modalOpen}
+                    setOpen={setModalOpen}
                     selectedVisitor={selectedVisitor}
                     refreshTable={fetchVisitorsAgain}
                 />

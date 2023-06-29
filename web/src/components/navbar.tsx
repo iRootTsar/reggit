@@ -1,7 +1,7 @@
 import logo from '../images/Komponent_logo_RED_white.png';
 import {Link, useLocation} from 'react-router-dom';
 import {Disclosure} from '@headlessui/react';
-import {FunctionComponent, useState} from 'react';
+import {FunctionComponent} from 'react';
 
 interface NavigationItem {
     name: string;

@@ -51,11 +51,11 @@ const Sidebar: FunctionComponent<SidebarProps> = ({
                             <Transition.Child
                                 as={Fragment}
                                 enter="transform transition ease-in-out duration-500 sm:duration-700"
-                                enterFrom="translate-x-full"
+                                enterFrom="translate-x-60"
                                 enterTo="translate-x-0"
                                 leave="transform transition ease-in-out duration-500 sm:duration-700"
                                 leaveFrom="translate-x-0"
-                                leaveTo="translate-x-full">
+                                leaveTo="translate-x-60">
                                 <Dialog.Panel className="w-screen max-w-md pt-48">
                                     <div className="flex h-4/6 flex-col overflow-y-scroll bg-gray-300 py-6 shadow-xl">
                                         <div className="px-4 sm:px-6">
