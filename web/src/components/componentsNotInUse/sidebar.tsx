@@ -1,6 +1,6 @@
 import {FunctionComponent, Fragment} from 'react';
 import {Dialog, Transition} from '@headlessui/react';
-import {VisitService} from '../clients/reggit-api/index';
+import {VisitService} from '../../clients/reggit-api/index';
 import {Visitor} from 'src/clients/reggit-api/models/Visitor';
 
 interface SidebarProps {

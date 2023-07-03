@@ -1,4 +1,4 @@
-import logo from '../images/Komponent_logo_RED_white.png';
+import logo from '../../images/Komponent_logo_RED_white.png';
 import {Link, useLocation} from 'react-router-dom';
 import {Disclosure} from '@headlessui/react';
 import {FunctionComponent} from 'react';
@@ -10,8 +10,8 @@ interface NavigationItem {
 }
 
 const navigation: NavigationItem[] = [
-    {name: 'Login', href: '/login', current: false},
     {name: 'Home', href: '/', current: false},
+    {name: 'Calendar', href: '/calendar', current: false},
 ];
 
 function classNames(...classes: string[]): string {
@@ -22,20 +22,20 @@ const Navbar: FunctionComponent = () => {
     const location = useLocation();
 
     return (
-        <div className="bg-gray-800 sticky top-0 z-50">
-            <Disclosure as="nav">
-                {({open}) => (
-                    <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-                        <div className="relative flex h-16 items-center justify-between">
-                            <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                                <div className="flex flex-shrink-0 items-center">
-                                    <img
-                                        className="hidden h-8 w-auto lg:block"
-                                        src={logo}
-                                        alt="Reggit"
-                                    />
-                                </div>
-                                <div className="sm:ml-6 sm:block">
+        <>
+            <div className="bg-gray-800 sticky top-0 z-50">
+                <Disclosure as="nav">
+                    {({open}) => (
+                        <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+                            <div className="absolute left-4 top-4">
+                                <img
+                                    className="hidden h-8 w-auto lg:block"
+                                    src={logo}
+                                    alt="Reggit"
+                                />
+                            </div>
+                            <div className="relative flex h-16 items-center justify-between">
+                                <div className="flex w-full justify-center items-center">
                                     <div className="flex space-x-4">
                                         {navigation.map(item => (
                                             <Link
@@ -55,10 +55,10 @@ const Navbar: FunctionComponent = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                )}
-            </Disclosure>
-        </div>
+                    )}
+                </Disclosure>
+            </div>
+        </>
     );
 };
 
