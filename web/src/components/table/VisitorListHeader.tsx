@@ -21,6 +21,9 @@ const VisitorListHeader: React.FC = () => {
                         <th scope="col" className="px-6 py-3">
                             Organization
                         </th>
+                        <th scope="col" className="px-6 py-3">
+                            Action
+                        </th>
                     </tr>
                 </thead>
             </table>

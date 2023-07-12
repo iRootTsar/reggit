@@ -1,8 +1,9 @@
 import logo from '../../images/Komponent_logo_RED_white.png';
 import {Link, useLocation} from 'react-router-dom';
 import {Disclosure} from '@headlessui/react';
-import {FunctionComponent} from 'react';
-
+import {FunctionComponent, useContext} from 'react';
+import {SearchContext} from './SearchContext';
+import SearchBar from './SearchBar';
 interface NavigationItem {
     name: string;
     href: string;
@@ -20,6 +21,7 @@ function classNames(...classes: string[]): string {
 
 const Navbar: FunctionComponent = () => {
     const location = useLocation();
+    const {searchTerm, setSearchTerm} = useContext(SearchContext);
 
     return (
         <>
@@ -53,6 +55,10 @@ const Navbar: FunctionComponent = () => {
                                         ))}
                                     </div>
                                 </div>
+                                <SearchBar
+                                    value={searchTerm}
+                                    onChange={setSearchTerm}
+                                />
                             </div>
                         </div>
                     )}

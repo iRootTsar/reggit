@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {VisitService} from '../clients/reggit-api/index';
 import {Visitor} from '../clients/reggit-api/models/Visitor';
 import UserInfoModal from 'src/components/table/UserOverlayModal';
-import SearchBar from 'src/components/common/SearchBar';
 import VisitorList from 'src/components/table/VisitorList';
+import {SearchContext} from 'src/components/common/SearchContext';
 
 const Home: React.FC = () => {
     const [visits, setVisits] = useState([] as Visitor[]);
-    const [searchTerm, setSearchTerm] = useState('');
+    const {searchTerm} = useContext(SearchContext);
     const [selectedVisitor, setSelectedVisitor] = useState<Visitor>();
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -35,7 +35,6 @@ const Home: React.FC = () => {
 
     return (
         <div className="flex flex-col">
-            <SearchBar value={searchTerm} onChange={setSearchTerm} />
             <VisitorList
                 visits={visits}
                 searchTerm={searchTerm}

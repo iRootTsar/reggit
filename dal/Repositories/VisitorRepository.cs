@@ -34,6 +34,11 @@ public class VisitorRepository
         await _context.Visitors.Where(x => x.Id == id).ExecuteDeleteAsync();
     }
 
+    public async Task DeleteMany(IEnumerable<int> ids)
+    {
+        await _context.Visitors.Where(x => ids.Contains(x.Id)).ExecuteDeleteAsync();
+    }
+
     public async Task<Visitor?> Get(int id)
     {
         return await _context.Visitors.FindAsync(id);
