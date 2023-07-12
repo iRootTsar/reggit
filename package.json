@@ -1,11 +1,8 @@
 {
-  "dependencies": {
-    "@react-navigation/native": "^6.1.6",
-    "@react-navigation/native-stack": "^6.9.12",
-    "babel-preset-react-native": "2.1.0",
-    "react-navigation": "^4.4.4"
-  },
-  "devDependencies": {
-    "openapi-typescript-codegen": "^0.24.0"
-  }
+	"name": "reggit",
+	"version": "0.0.0",
+	"license": "UNLICENSED",
+	"devDependencies": {
+		"openapi-typescript-codegen": "^0.24.0"
+	}
 }
