@@ -1,7 +1,7 @@
 import {FunctionComponent, Fragment} from 'react';
 import {Dialog, Transition} from '@headlessui/react';
-import {VisitService} from '../../clients/reggit-api/index';
-import {Visitor} from 'src/clients/reggit-api/models/Visitor';
+import {VisitService} from 'clients/reggit-api/dist/services/VisitService';
+import {Visitor} from 'clients/reggit-api/models/Visitor';
 
 interface SidebarProps {
     open: boolean;

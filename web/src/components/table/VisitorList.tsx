@@ -1,5 +1,5 @@
 import React from 'react';
-import {Visitor} from '../../clients/reggit-api/models/Visitor';
+import {Visitor} from 'clients/reggit-api/models/Visitor';
 import VisitorRow from './VisitorRow';
 import VisitorListHeader from './VisitorListHeader';
 

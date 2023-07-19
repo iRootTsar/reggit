@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {VisitService} from '../clients/reggit-api/index';
-import {Visitor} from '../clients/reggit-api/models/Visitor';
+import {VisitService} from 'clients/reggit-api/dist/services/VisitService';
+import {Visitor} from 'clients/reggit-api/models/Visitor';
 import UserInfoModal from 'src/components/table/UserOverlayModal';
 import VisitorList from 'src/components/table/VisitorList';
 import {SearchContext} from 'src/components/common/SearchContext';

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Visitor} from '../../clients/reggit-api/models/Visitor';
+import {Visitor} from 'clients/reggit-api/models/Visitor';
 
 interface VisitorRowProps {
     visitor: Visitor;

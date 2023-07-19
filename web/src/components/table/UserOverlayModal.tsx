@@ -1,7 +1,7 @@
 import {Dialog, Transition} from '@headlessui/react';
 import {Fragment} from 'react';
-import {Visitor} from 'src/clients/reggit-api/models/Visitor';
-import {VisitService} from 'src/clients/reggit-api/services/VisitService';
+import {Visitor} from 'clients/reggit-api/models/Visitor';
+import {VisitService} from 'clients/reggit-api/dist/services/VisitService';
 
 interface ModalProps {
     open: boolean;
