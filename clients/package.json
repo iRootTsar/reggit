@@ -1,8 +1,8 @@
 {
 	"name": "clients",
 	"version": "1.0.0",
-	"main": "dist/index.js",
-	"types": "dist/index.d.ts",
+	"main": "reggit-api/dist/index.js",
+	"types": "reggit-api/dist/index.d.ts",
 	"scripts": {
 		"generate-api-client": "npx openapi -i http://localhost:5101/swagger/v1/swagger.json -o ./reggit-api",
 		"build": "tsc"

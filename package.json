@@ -4,10 +4,10 @@
 	"license": "UNLICENSED",
 	"private": true,
 	"scripts": {
-		"install": "cd web && yarn install && cd ../mobile && yarn install",
+		"install-all": "cd web && yarn install && cd ../mobile && yarn install",
 		"docker-up": "docker-compose -f docker-compose.yml up",
 		"docker-down": "docker-compose -f docker-compose.yml down",
-		"generate": "cd clients && yarn generate-api-client && yarn build",
+		"generate-api": "cd clients && yarn generate-api-client && yarn build",
 		"api:run": "cd api && dotnet watch",
 		"mobile:run": "cd mobile && yarn start",
 		"web:run": "cd web && yarn start",

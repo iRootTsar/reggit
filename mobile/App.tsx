@@ -6,7 +6,7 @@ import RegistrationScreen from './src/screens/Registration';
 import LabelPreviewScreen from './src/screens/LabelPreview';
 
 type RootStackParamList = {
-    Hjem: {message: string} | undefined;
+    Home: {message: string} | undefined;
     Registration: undefined;
     LabelPreview: undefined;
 };
@@ -18,7 +18,7 @@ function App() {
         <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen
-                    name="Hjem"
+                    name="Home"
                     component={WelcomeScreen}
                     options={({route}) => ({title: route.params?.message})}
                 />

@@ -1,18 +1,17 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
-import {View, Image} from 'react-native';
+import {View, Image, PermissionsAndroid, Platform} from 'react-native';
 import {Input, Button} from 'react-native-elements';
 import {launchCamera, CameraOptions} from 'react-native-image-picker';
 import tw from 'tailwind-react-native-classnames';
+import {VisitService, CreateVisitorDTO} from 'clients';
 
 function Registration({navigation}: {navigation: any}) {
     const [photo, setPhoto] = useState<string | null>(null);
     const [formData, setFormData] = useState({
-        fornavn: '',
-        etternavn: '',
-        tlfNr: '',
+        name: '',
         email: '',
-        organisasjon: '',
+        phone: '',
+        organization: '',
     });
 
     const takePhoto = () => {
@@ -40,9 +39,54 @@ function Registration({navigation}: {navigation: any}) {
         });
     };
 
+    const requestCameraPermission = async () => {
+        if (Platform.OS === 'android') {
+            try {
+                const granted = await PermissionsAndroid.request(
+                    PermissionsAndroid.PERMISSIONS.CAMERA,
+                    {
+                        title: 'App Camera Permission',
+                        message: 'App needs access to your camera',
+                        buttonNeutral: 'Ask Me Later',
+                        buttonNegative: 'Cancel',
+                        buttonPositive: 'OK',
+                    }
+                );
+                if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                    takePhoto();
+                } else {
+                    console.log('Camera permission denied');
+                }
+            } catch (err) {
+                console.warn(err);
+            }
+        } else if (Platform.OS === 'ios') {
+            // On iOS, the system will automatically prompt for permissions when camera is accessed.
+            // Ensure you have the NSCameraUsageDescription key in your Info.plist
+            takePhoto();
+        }
+    };
+
     const register = () => {
-        // Perform the registration logic here
-        navigation.navigate('LabelPreview', formData);
+        const requestBody: CreateVisitorDTO = {
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            organization: formData.organization,
+            imageURL: photo,
+        };
+
+        // Send the PUT request
+        VisitService.createVisitor(requestBody)
+            .then(response => {
+                console.log(response);
+                navigation.navigate('LabelPreview', formData);
+                // Handle successful registration
+            })
+            .catch(error => {
+                console.log(error);
+                // Handle failed registration
+            });
     };
 
     const handleInputChange = (name: string, value: string) => {
@@ -53,39 +97,32 @@ function Registration({navigation}: {navigation: any}) {
         <View style={tw`flex-1 bg-gray-800 items-center justify-center p-5`}>
             <View style={tw`w-full`}>
                 <Input
-                    placeholder="Fornavn"
+                    placeholder="Name"
                     inputStyle={tw`text-white`}
                     placeholderTextColor="gray"
-                    onChangeText={value => handleInputChange('fornavn', value)}
+                    onChangeText={value => handleInputChange('name', value)}
                 />
+
                 <Input
-                    placeholder="Etternavn"
-                    inputStyle={tw`text-white`}
-                    placeholderTextColor="gray"
-                    onChangeText={value =>
-                        handleInputChange('etternavn', value)
-                    }
-                />
-                <Input
-                    placeholder="Tlf.nr"
+                    placeholder="Phone"
                     keyboardType="phone-pad"
                     inputStyle={tw`text-white`}
                     placeholderTextColor="gray"
-                    onChangeText={value => handleInputChange('Tlf.nr', value)}
+                    onChangeText={value => handleInputChange('phone', value)}
                 />
                 <Input
                     placeholder="E-mail"
                     keyboardType="email-address"
                     inputStyle={tw`text-white`}
                     placeholderTextColor="gray"
-                    onChangeText={value => handleInputChange('E-mail', value)}
+                    onChangeText={value => handleInputChange('email', value)}
                 />
                 <Input
-                    placeholder="Organisasjon"
+                    placeholder="Organization"
                     inputStyle={tw`text-white`}
                     placeholderTextColor="gray"
                     onChangeText={value =>
-                        handleInputChange('Organisasjon', value)
+                        handleInputChange('organization', value)
                     }
                 />
                 {photo && (
@@ -94,14 +131,14 @@ function Registration({navigation}: {navigation: any}) {
                     </View>
                 )}
                 <Button
-                    title={photo ? 'Ta bilde på nytt' : 'Ta bilde'}
-                    onPress={takePhoto}
+                    title={photo ? 'Take a new photo' : 'Take a photo'}
+                    onPress={requestCameraPermission}
                     buttonStyle={tw`bg-blue-500`}
                     titleStyle={tw`text-white`}
                     type="outline"
                 />
                 <Button
-                    title="Bekreft"
+                    title="Confirm"
                     onPress={register}
                     buttonStyle={tw`bg-blue-500 mt-4`}
                     titleStyle={tw`text-white`}
