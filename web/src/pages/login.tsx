@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../images/Komponent_logo_RED_white.png';
+import logo from '../images/Miles_transparent.png';
 import {Link, useNavigate} from 'react-router-dom';
 
 function Login() {

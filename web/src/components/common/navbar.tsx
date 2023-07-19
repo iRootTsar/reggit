@@ -1,4 +1,4 @@
-import logo from '../../images/Komponent_logo_RED_white.png';
+import logo from '../../images/Miles_transparent.png';
 import {Link, useLocation} from 'react-router-dom';
 import {Disclosure} from '@headlessui/react';
 import {FunctionComponent, useContext} from 'react';

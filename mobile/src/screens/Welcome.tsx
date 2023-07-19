@@ -5,12 +5,12 @@ function WelcomeScreen({navigation}: {navigation: any}) {
     return (
         <View className="flex-1 bg-gray-800 items-center justify-center px-5">
             <Image
-                source={require('../images/Komponent_logo_RED_white.png')}
+                source={require('../images/Miles_transparent.png')}
                 className="w-64 h-10 mb-5 self-center" // adjust the width and height here
                 resizeMode="contain"
             />
             <Text className="text-2xl text-white text-center mb-5">
-                Welcome to Komponent!
+                Welcome to Miles!
             </Text>
             <TouchableOpacity
                 className="bg-black py-4 rounded-md w-full"
