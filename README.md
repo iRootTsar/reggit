@@ -26,19 +26,19 @@ Web: React with TS and TailwindCSS
 All commands to run can be run from project root folder, check package.json in project root folder.
 For running individually you can check the commands or do as following:
 
-Postgresql & Docker for local db: "docker-compose -f docker-compose.yml up" and to remove "docker-compose -f docker-compose.yml down"
+Postgresql & Docker for local db: `docker-compose -f docker-compose.yml up` and to remove `docker-compose -f docker-compose.yml down`
 
-.net api: "cd api" -> "dotnet watch" for hot reload.
+.net api: `cd api` -> `dotnet watch` for hot reload.
 
 If Metro bundler server doesn't automatically start you can run;
-Metro bundler server: "cd mobile" -> "yarn start".
+Metro bundler server: `cd mobile` -> `yarn start`.
 This is mostly used for android app when run with the command below.
 
-Android: yarn android
+Android: `yarn android`
 
-iOS: "yarn ios" or yarn ios-pro" for 14 pro
+iOS: `yarn ios` or `yarn ios-pro` for 14 pro
 
-Web: yarn start
+Web: `yarn start`
 
 ## Contribution
 
