@@ -3,7 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import WelcomeScreen from './src/screens/Welcome';
 import RegistrationScreen from './src/screens/Registration';
-import LabelPreviewScreen from './src/screens/LabelPreview';
+import LabelPreview from './src/screens/LabelPreview';
 
 type RootStackParamList = {
     Home: {message: string} | undefined;
@@ -26,10 +26,7 @@ function App() {
                     name="Registration"
                     component={RegistrationScreen}
                 />
-                <Stack.Screen
-                    name="LabelPreview"
-                    component={LabelPreviewScreen}
-                />
+                <Stack.Screen name="LabelPreview" component={LabelPreview} />
             </Stack.Navigator>
         </NavigationContainer>
     );

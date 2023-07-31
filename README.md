@@ -1,6 +1,6 @@
 # Reggit
 
-Reggit, the registration app for events @Komponent
+Reggit, the registration app for events @Miles
 
 Mobile: React-native with TS and Nativewind (Tailwindcss)
 Web: React with TS and TailwindCSS
@@ -21,7 +21,7 @@ Web: React with TS and TailwindCSS
    - For the mobile app, navigate into the `mobile` directory and run `yarn install`
    - For the web admin panel, navigate into the `web` directory and run `yarn install`
 
-Migration DB: cd api -> dotnet ef migrations add "Name" --project ../dal
+Migration DB: `cd api` -> `dotnet ef migrations add "Name" --project ../dal`
 
 ## Run
 

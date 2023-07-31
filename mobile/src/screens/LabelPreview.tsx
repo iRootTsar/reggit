@@ -1,26 +1,35 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import tw from 'tailwind-react-native-classnames';
-//import RNPrint from 'react-native-print';
+import axios from 'axios';
+import {CreateVisitorDTO} from 'clients';
 
-function LabelPreviewScreen({
-    route,
-    navigation,
-}: {
-    route: any;
-    navigation: any;
-}) {
-    const {name, phone, email, organization} = route.params;
+function LabelPreview({route, navigation}: {route: any; navigation: any}) {
+    const {name, phone, email, organization, imageURL} = route.params;
 
-    // const printHTML = async () => {
-    //     await RNPrint.print({
-    //         html: `<div>
-    //                     <p>${name}</p>
-    //                     <p>${organization}</p>
-    //                </div>`,
-    //     });
-    //     navigation.navigate('Home');
-    // };
+    axios.defaults.baseURL = 'http://localhost:5101';
+
+    const confirmAndPrint = () => {
+        const requestBody: CreateVisitorDTO = {
+            name,
+            email,
+            phone,
+            organization,
+            imageURL,
+        };
+
+        axios
+            .put('/Visit', requestBody)
+            .then(response => {
+                console.log(response);
+                navigation.navigate('Home');
+                // Handle successful registration
+            })
+            .catch(error => {
+                console.log(error);
+                // Handle failed registration
+            });
+    };
 
     return (
         <View style={tw`flex-1 bg-gray-800 justify-start items-center p-5`}>
@@ -63,7 +72,7 @@ function LabelPreviewScreen({
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={tw`bg-blue-500 p-3 rounded`}
-                    onPress={() => navigation.navigate('Home')}>
+                    onPress={confirmAndPrint}>
                     <Text style={tw`text-white text-center`}>
                         Confirm and print
                     </Text>
@@ -85,4 +94,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default LabelPreviewScreen;
+export default LabelPreview;
