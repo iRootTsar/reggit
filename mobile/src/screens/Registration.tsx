@@ -3,7 +3,9 @@ import {View, Image, PermissionsAndroid, Platform} from 'react-native';
 import {Input, Button} from 'react-native-elements';
 import {launchCamera, CameraOptions} from 'react-native-image-picker';
 import tw from 'tailwind-react-native-classnames';
-import {VisitService, CreateVisitorDTO} from 'clients';
+import {CreateVisitorDTO} from 'clients';
+import axios from 'axios';
+//import DeviceInfo from 'react-native-device-info';
 
 function Registration({navigation}: {navigation: any}) {
     const [photo, setPhoto] = useState<string | null>(null);
@@ -61,11 +63,20 @@ function Registration({navigation}: {navigation: any}) {
                 console.warn(err);
             }
         } else if (Platform.OS === 'ios') {
-            // On iOS, the system will automatically prompt for permissions when camera is accessed.
-            // Ensure you have the NSCameraUsageDescription key in your Info.plist
             takePhoto();
         }
     };
+
+    // const isAndroidEmulator =
+    //     Platform.OS === 'android' && DeviceInfo.isEmulator();
+    // const isIOSEmulator = Platform.OS === 'ios' && DeviceInfo.isEmulator();
+    // const apiURL =
+    //     isAndroidEmulator || isIOSEmulator
+    //         ? 'http://localhost:5101'
+    //         : 'http://10.101.0.137:5101';
+    //axios.defaults.baseURL = apiURL;
+
+    axios.defaults.baseURL = 'http://localhost:5101';
 
     const register = () => {
         const requestBody: CreateVisitorDTO = {
@@ -76,8 +87,8 @@ function Registration({navigation}: {navigation: any}) {
             imageURL: photo,
         };
 
-        // Send the PUT request
-        VisitService.createVisitor(requestBody)
+        axios
+            .put('/Visit', requestBody)
             .then(response => {
                 console.log(response);
                 navigation.navigate('LabelPreview', formData);

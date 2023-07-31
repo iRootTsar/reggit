@@ -49,5 +49,12 @@ public class VisitController : ControllerBase
     {
         await _repository.Delete(id);
     }
+
+    [HttpDelete("DeleteVisitors", Name = "DeleteVisitors")]
+    public async Task DeleteMultipleVisitor([FromBody] List<int> ids)
+    {
+        await _repository.DeleteMany(ids);
+    }
+
 }
 

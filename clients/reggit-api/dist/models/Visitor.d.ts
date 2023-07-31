@@ -5,4 +5,5 @@ export type Visitor = {
     phone?: string | null;
     organization?: string | null;
     imageURL?: string | null;
+    registeredAt?: string;
 };

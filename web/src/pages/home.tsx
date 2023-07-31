@@ -13,11 +13,9 @@ const Home: React.FC = () => {
 
     // create hook for loading visits
     const getVisits = async () => {
-        // setLoading(true);
         VisitService.getVisitors()
             .then(response => {
                 setVisits(response);
-                //   setLoading(false);
             })
             .catch(error => {
                 console.log(error);
@@ -28,7 +26,6 @@ const Home: React.FC = () => {
         getVisits();
     }, []);
 
-    // Function for refreshing table
     const fetchVisitorsAgain = () => {
         getVisits();
     };
@@ -42,6 +39,7 @@ const Home: React.FC = () => {
                     setSelectedVisitor(visitor);
                     setModalOpen(true);
                 }}
+                refreshTable={fetchVisitorsAgain}
             />
             <UserInfoModal
                 open={modalOpen}

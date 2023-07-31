@@ -32,4 +32,10 @@ export declare class VisitService {
      * @throws ApiError
      */
     static deleteVisitor(id: number): CancelablePromise<any>;
+    /**
+     * @param requestBody
+     * @returns any Success
+     * @throws ApiError
+     */
+    static deleteVisitors(requestBody?: Array<number>): CancelablePromise<any>;
 }

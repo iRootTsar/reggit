@@ -27,15 +27,17 @@ const Modal: React.FC<ModalProps> = ({
         : undefined;
 
     const deleteVisitor = async (id: number) => {
-        VisitService.deleteVisitor(id)
-            .then(response => {
-                console.log(response);
-                setOpen(false);
-                refreshTable();
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        if (window.confirm('Are you sure you want to delete this visitor?')) {
+            VisitService.deleteVisitor(id)
+                .then(response => {
+                    console.log(response);
+                    setOpen(false);
+                    refreshTable();
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
     };
 
     return (
@@ -45,7 +47,7 @@ const Modal: React.FC<ModalProps> = ({
                 className="fixed z-10 inset-0 overflow-y-auto"
                 onClose={setOpen}>
                 <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                    <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+                    <Dialog.Overlay className="fixed inset-0" />
 
                     <span
                         className="hidden sm:inline-block sm:align-middle sm:h-screen"

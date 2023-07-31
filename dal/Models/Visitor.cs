@@ -16,4 +16,5 @@ public record Visitor
 
     public string? ImageURL { get; set; }
 
+    public DateTime RegisteredAt { get; set; } = DateTime.UtcNow;
 }

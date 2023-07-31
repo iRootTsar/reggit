@@ -88,4 +88,20 @@ export class VisitService {
         });
     }
 
+    /**
+     * @param requestBody
+     * @returns any Success
+     * @throws ApiError
+     */
+    public static deleteVisitors(
+        requestBody?: Array<number>,
+    ): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'DELETE',
+            url: '/Visit/DeleteVisitors',
+            body: requestBody,
+            mediaType: 'application/json',
+        });
+    }
+
 }

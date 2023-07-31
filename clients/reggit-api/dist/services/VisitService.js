@@ -68,5 +68,18 @@ class VisitService {
             },
         });
     }
+    /**
+     * @param requestBody
+     * @returns any Success
+     * @throws ApiError
+     */
+    static deleteVisitors(requestBody) {
+        return (0, request_1.request)(OpenAPI_1.OpenAPI, {
+            method: 'DELETE',
+            url: '/Visit/DeleteVisitors',
+            body: requestBody,
+            mediaType: 'application/json',
+        });
+    }
 }
 exports.VisitService = VisitService;
