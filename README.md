@@ -23,6 +23,20 @@ Web: React with TS and TailwindCSS
 
 Migration DB: `cd api` -> `dotnet ef migrations add "Name" --project ../dal`
 
+Ngrok:
+ngrok.yml in project root:
+
+"version: 2
+region: eu
+authtoken: AUTH_TOKEN
+tunnels:
+api:
+addr: 5101
+proto: http
+subdomain: DOMAIN_NAME"
+
+Add a .env file in mobile `NGROK_DOMAIN = "NGROK_DOMAIN_ADRESS"`
+
 ## Run
 
 All commands to run can be run from project root folder, check package.json in project root folder.
