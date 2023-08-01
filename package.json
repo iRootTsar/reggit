@@ -11,10 +11,14 @@
 		"api:run": "cd api && dotnet watch",
 		"mobile:run": "cd mobile && yarn start",
 		"web:run": "cd web && yarn start",
-		"run-all": "yarn api:run & yarn mobile:run & yarn web:run"
+		"run-all": "yarn api:run & yarn mobile:run & yarn web:run",
+		"ngrok": "ngrok start --all --config ngrok.yml"
 	},
 	"devDependencies": {
 		"openapi-typescript-codegen": "^0.24.0",
 		"typescript": "^5.1.6"
+	},
+	"dependencies": {
+		"ngrok": "^5.0.0-beta.2"
 	}
 }

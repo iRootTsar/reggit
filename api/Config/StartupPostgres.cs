@@ -9,7 +9,7 @@ public static class StartupPostgres
     public static void ConfigurePostgres(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<Dbcontext>(builder => builder.UseNpgsql(
-            "Server=localhost;Port=5433;Database=reggit;Username=reggit;Password=reggit",
+            configuration.GetConnectionString("DefaultConnection"),
             x =>
             {
                 x.MigrationsHistoryTable(HistoryRepository.DefaultTableName, "Reggit");

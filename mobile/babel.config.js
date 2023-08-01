@@ -9,5 +9,11 @@ module.exports = {
             },
         ],
         ['nativewind/babel'],
+        [
+            'module:react-native-dotenv',
+            {
+                moduleName: 'react-native-dotenv',
+            },
+        ],
     ],
 };

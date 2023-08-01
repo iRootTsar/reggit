@@ -3,11 +3,12 @@ import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import tw from 'tailwind-react-native-classnames';
 import axios from 'axios';
 import {CreateVisitorDTO} from 'clients';
+import {config} from '../../config';
 
 function LabelPreview({route, navigation}: {route: any; navigation: any}) {
     const {name, phone, email, organization, imageURL} = route.params;
 
-    axios.defaults.baseURL = 'http://localhost:5101';
+    axios.defaults.baseURL = config.ngrokDomain;
 
     const confirmAndPrint = () => {
         const requestBody: CreateVisitorDTO = {
