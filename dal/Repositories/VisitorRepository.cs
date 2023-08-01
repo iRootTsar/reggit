@@ -16,13 +16,13 @@ public class VisitorRepository
 
     public async Task<int> Create(CreateVisitorDTO dto)
     {
-        Visitor visitor = new()
+        Visitor visitor = new Visitor
         {
             Name = dto.Name,
             Email = dto.Email,
             Organization = dto.Organization,
             Phone = dto.Phone,
-            ImageURL = dto.ImageURL
+            Image = dto.Image
         };
         _context.Visitors.Add(visitor);
         await _context.SaveChangesAsync();
@@ -56,6 +56,6 @@ public class VisitorRepository
             .SetProperty(prop => prop.Email, visitorUpdate.Email)
             .SetProperty(prop => prop.Organization, visitorUpdate.Organization)
             .SetProperty(prop => prop.Phone, visitorUpdate.Phone)
-            .SetProperty(prop => prop.ImageURL, visitorUpdate.ImageURL));
+            .SetProperty(prop => prop.Image, visitorUpdate.Image));
     }
 }

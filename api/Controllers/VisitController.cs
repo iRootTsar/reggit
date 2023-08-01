@@ -32,15 +32,17 @@ public class VisitController : ControllerBase
         return await _repository.Get(id);
     }
 
-    [HttpPut(Name = "CreateVisitor")]
-    public async Task<int> CreateVisitor(CreateVisitorDTO createVisitorUpdate)
+    [HttpPost("CreateVisitor", Name = "CreateVisitor")]
+    public async Task<int> CreateVisitor([FromForm] CreateVisitorDTO createVisitorDTO)
     {
-        return await _repository.Create(createVisitorUpdate);
+
+        return await _repository.Create(createVisitorDTO);
     }
 
-    [HttpPost("", Name = "UpdateVisitor")]
-    public async Task UpdateVisitor(VisitorUpdateDTO visitorUpdate)
+    [HttpPost("UpdateVisitor", Name = "UpdateVisitor")]
+    public async Task UpdateVisitor([FromForm] VisitorUpdateDTO visitorUpdate)
     {
+
         await _repository.Update(visitorUpdate);
     }
 
