@@ -1,12 +1,12 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
 import tw from 'tailwind-react-native-classnames';
 import axios from 'axios';
 import {CreateVisitorDTO} from 'clients';
 import {config} from '../../config';
 
 function LabelPreview({route, navigation}: {route: any; navigation: any}) {
-    const {name, phone, email, organization, imageURL} = route.params;
+    const {name, phone, email, organization, image} = route.params;
 
     axios.defaults.baseURL = config.ngrokDomain;
 
@@ -16,7 +16,7 @@ function LabelPreview({route, navigation}: {route: any; navigation: any}) {
             email,
             phone,
             organization,
-            imageURL,
+            image,
         };
 
         axios
@@ -51,6 +51,11 @@ function LabelPreview({route, navigation}: {route: any; navigation: any}) {
                     <Text style={tw`font-bold`}>Organization:</Text>{' '}
                     {organization}
                 </Text>
+
+                <Image
+                    source={{uri: `data:image/png;base64,${image}`}}
+                    style={{width: 100, height: 100}}
+                />
             </View>
 
             <Text style={tw`text-white text-center font-bold mb-5 mt-10`}>

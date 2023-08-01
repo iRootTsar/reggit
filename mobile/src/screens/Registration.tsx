@@ -29,9 +29,9 @@ function Registration({navigation}: {navigation: any}) {
                     response.errorMessage
                 );
             } else {
-                const uri = response.assets && response.assets[0]?.uri;
-                if (uri) {
-                    setPhoto(uri);
+                const base64 = response.assets && response.assets[0]?.base64;
+                if (base64) {
+                    setPhoto(base64);
                 } else {
                     console.log('No image selected');
                 }
@@ -71,10 +71,8 @@ function Registration({navigation}: {navigation: any}) {
             email: formData.email,
             phone: formData.phone,
             organization: formData.organization,
-            imageURL: photo,
+            image: photo || null,
         };
-
-        // Navigate to 'LabelPreview' with dataToPass
         navigation.navigate('LabelPreview', dataToPass);
     };
 
@@ -116,7 +114,10 @@ function Registration({navigation}: {navigation: any}) {
                 />
                 {photo && (
                     <View style={{alignItems: 'center', marginBottom: 20}}>
-                        <Image source={{uri: photo}} style={tw`w-24 h-24`} />
+                        <Image
+                            source={{uri: `data:image/png;base64,${photo}`}}
+                            style={{width: 100, height: 100}}
+                        />
                     </View>
                 )}
                 <Button

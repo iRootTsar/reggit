@@ -22,7 +22,7 @@ const Modal: React.FC<ModalProps> = ({
               email: selectedVisitor.email,
               phone: selectedVisitor.phone,
               organization: selectedVisitor.organization,
-              imageURL: selectedVisitor.imageURL,
+              Image: selectedVisitor.image,
           }
         : undefined;
 
@@ -82,10 +82,9 @@ const Modal: React.FC<ModalProps> = ({
                                     <div className="sm:ml-8 mt-16">
                                         <img
                                             className="w-38 h-38 rounded-full"
-                                            src={
-                                                userData?.imageURL ||
-                                                'No image provided'
-                                            }
+                                            src={`data:image/png;base64, ${
+                                                userData?.Image || ''
+                                            }`}
                                             alt={
                                                 userData?.name ||
                                                 'No name provided'

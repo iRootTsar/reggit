@@ -22,7 +22,7 @@ const Sidebar: FunctionComponent<SidebarProps> = ({
               email: selectedVisitor.email,
               phone: selectedVisitor.phone,
               organization: selectedVisitor.organization,
-              imageURL: selectedVisitor.imageURL,
+              imageURL: selectedVisitor.image,
           }
         : undefined;
 

@@ -3,5 +3,5 @@ export type CreateVisitorDTO = {
     email?: string | null;
     phone?: string | null;
     organization?: string | null;
-    imageURL?: string | null;
+    image?: string | null;
 };

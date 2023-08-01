@@ -4,6 +4,6 @@ export type Visitor = {
     email: string;
     phone?: string | null;
     organization?: string | null;
-    imageURL?: string | null;
+    image?: string | null;
     registeredAt?: string;
 };

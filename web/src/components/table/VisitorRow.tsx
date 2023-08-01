@@ -29,7 +29,7 @@ const VisitorRow: React.FC<VisitorRowProps> = ({
             className={`px-6 py-4 ${'bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'}`}>
             <td className="px-2 py-4" onClick={() => onClick(visitor)}>
                 <img
-                    src={visitor.imageURL || ''}
+                    src={`data:image/png;base64, ${visitor.image || ''}`}
                     alt={visitor.name || ''}
                     className="w-12 h-12 object-cover rounded-full"
                 />

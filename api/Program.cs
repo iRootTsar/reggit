@@ -1,5 +1,6 @@
 using api.Config;
 using dal;
+using dal.DTO;
 using dal.repositories;
 using Microsoft.OpenApi.Models;
 
@@ -27,6 +28,7 @@ if (app.Environment.IsDevelopment())
     c.PreSerializeFilters.Add((swagger, httpReq) =>
     {
         swagger.Servers = new List<OpenApiServer> { new() { Url = $"{httpReq.Scheme}://{httpReq.Host.Value}" } };
+
     })
     );
     app.UseSwaggerUI();
