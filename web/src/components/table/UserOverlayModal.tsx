@@ -68,20 +68,20 @@ const Modal: React.FC<ModalProps> = ({
                                         <h2 className="mb-4 mt-4 text-2xl font-semibold text-gray-900">
                                             {userData?.name}
                                         </h2>
-                                        <p className="text-sm text-gray-500">
+                                        <p className="text-base text-gray-500">
                                             Email: {userData?.email}
                                         </p>
-                                        <p className="text-sm text-gray-500">
+                                        <p className="text-base text-gray-500">
                                             Phone: {userData?.phone}
                                         </p>
-                                        <p className="text-sm text-gray-500">
+                                        <p className="text-base text-gray-500">
                                             Organization:{' '}
                                             {userData?.organization}
                                         </p>
                                     </div>
-                                    <div className="sm:ml-8 mt-16">
+                                    <div className="sm:ml-8">
                                         <img
-                                            className="w-38 h-38 rounded-full"
+                                            className="w-40 h-48 rounded"
                                             src={`data:image/png;base64, ${
                                                 userData?.Image || ''
                                             }`}
