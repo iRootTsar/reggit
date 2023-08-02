@@ -34,31 +34,43 @@ function LabelPreview({route, navigation}: {route: any; navigation: any}) {
 
     return (
         <View style={tw`flex-1 bg-gray-800 justify-start items-center p-5`}>
-            <Text style={tw`text-white text-center font-bold mt-10 mb-5`}>
+            <Text
+                style={[
+                    tw`text-white text-center font-bold mt-10 mb-5`,
+                    {fontSize: 20},
+                ]}>
                 Registered Information
             </Text>
-            <View style={tw`mb-5 items-start w-1/2`}>
-                <Text style={tw`text-white text-left mb-1`}>
-                    <Text style={tw`font-bold`}>Name:</Text> {name}
-                </Text>
-                <Text style={tw`text-white text-left mb-1`}>
-                    <Text style={tw`font-bold`}>Phone:</Text> {phone}
-                </Text>
-                <Text style={tw`text-white text-left mb-1`}>
-                    <Text style={tw`font-bold`}>Email:</Text> {email}
-                </Text>
-                <Text style={tw`text-white text-left mb-1`}>
-                    <Text style={tw`font-bold`}>Organization:</Text>{' '}
-                    {organization}
-                </Text>
+            <View style={tw`mb-5 flex-row`}>
+                <View style={tw`items-start w-1/2`}>
+                    <Text style={tw`text-white text-left mb-1`}>
+                        <Text style={tw`font-bold`}>Name:</Text> {name}
+                    </Text>
+                    <Text style={tw`text-white text-left mb-1`}>
+                        <Text style={tw`font-bold`}>Phone:</Text> {phone}
+                    </Text>
+                    <Text style={tw`text-white text-left mb-1`}>
+                        <Text style={tw`font-bold`}>Email:</Text> {email}
+                    </Text>
+                    <Text style={tw`text-white text-left mb-1`}>
+                        <Text style={tw`font-bold`}>Organization:</Text>{' '}
+                        {organization}
+                    </Text>
+                </View>
 
-                <Image
-                    source={{uri: `data:image/png;base64,${image}`}}
-                    style={{width: 100, height: 100}}
-                />
+                <View style={tw`items-center justify-center mt-0`}>
+                    <Image
+                        source={{uri: `data:image/png;base64,${image}`}}
+                        style={{width: 100, height: 100}}
+                    />
+                </View>
             </View>
 
-            <Text style={tw`text-white text-center font-bold mb-5 mt-10`}>
+            <Text
+                style={[
+                    tw`text-white text-center font-bold mt-10 mb-5`,
+                    {fontSize: 20},
+                ]}>
                 Label Preview
             </Text>
             <View style={styles.label}>
@@ -68,7 +80,7 @@ function LabelPreview({route, navigation}: {route: any; navigation: any}) {
                 </Text>
             </View>
 
-            <View style={tw`mt-10`}>
+            <View style={tw`mt-5`}>
                 <TouchableOpacity
                     style={tw`bg-blue-500 p-3 mb-8 rounded`}
                     onPress={() => navigation.goBack()}>
