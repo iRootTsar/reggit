@@ -29,8 +29,7 @@ const SearchBar: React.FC<SearchBarProps> = ({value, onChange}) => {
     return (
         <div
             ref={searchRef}
-            className="relative flex items-center w-full max-w-lg lg:max-w-xs"
-            onClick={() => setIsFocused(true)}>
+            className="relative flex items-center w-full max-w-sm lg:max-w-lg">
             <MagnifyingGlassIcon
                 className={`h-5 w-5 text-gray-400 absolute top-1/2 left-3 transform -translate-y-1/2 ${
                     isFocused ? 'hidden' : ''
@@ -42,10 +41,7 @@ const SearchBar: React.FC<SearchBarProps> = ({value, onChange}) => {
                 placeholder="Search..."
                 value={value}
                 onChange={e => onChange(e.target.value)}
-                onBlur={() => setIsFocused(false)}
-                className={`block w-full rounded-md border-0 bg-gray-700 py-1.5 pl-10 pr-3 text-gray-300 placeholder:text-gray-400 focus:bg-white focus:text-gray-900 focus:ring-0 sm:text-sm sm:leading-6 ${
-                    isFocused ? '' : 'hidden'
-                }`}
+                className={`w-full block rounded-md border-0 bg-gray-700 py-1.5 pl-10 pr-3 text-gray-300 placeholder:text-gray-400 focus:bg-white focus:text-gray-900 focus:ring-0 sm:text-sm sm:leading-6`}
             />
         </div>
     );

@@ -37,24 +37,21 @@ const Navbar: FunctionComponent = () => {
                                     alt="Reggit"
                                 />
                             </div>
-                            <div className="relative flex h-16 items-center justify-between">
-                                <div className="flex w-full justify-center items-center">
-                                    <div className="flex space-x-4">
-                                        {navigation.map(item => (
-                                            <Link
-                                                key={item.name}
-                                                to={item.href}
-                                                className={classNames(
-                                                    location.pathname ===
-                                                        item.href
-                                                        ? 'bg-gray-900 text-white'
-                                                        : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                                                    'rounded-md px-3 py-2 text-sm font-medium'
-                                                )}>
-                                                {item.name}
-                                            </Link>
-                                        ))}
-                                    </div>
+                            <div className="relative flex h-16 items-center justify-center">
+                                <div className="flex space-x-4">
+                                    {navigation.map(item => (
+                                        <Link
+                                            key={item.name}
+                                            to={item.href}
+                                            className={classNames(
+                                                location.pathname === item.href
+                                                    ? 'bg-gray-900 text-white'
+                                                    : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                                'rounded-md px-3 py-2 text-sm font-medium'
+                                            )}>
+                                            {item.name}
+                                        </Link>
+                                    ))}
                                 </div>
                                 <SearchBar
                                     value={searchTerm}
