@@ -21,7 +21,7 @@ const VisitorRow: React.FC<VisitorRowProps> = ({
         const daysSinceRegistration =
             (new Date().getTime() - registeredDate.getTime()) /
             (1000 * 60 * 60 * 24);
-        setIsOverdue(daysSinceRegistration > 0.01); //Change to amount of days before overdue
+        setIsOverdue(daysSinceRegistration > 25); //Change to amount of days before overdue
     }, [visitor]);
 
     return (
