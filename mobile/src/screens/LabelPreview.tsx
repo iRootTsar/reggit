@@ -1,9 +1,11 @@
 import React from 'react';
-import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Text, Image, StyleSheet} from 'react-native';
 import tw from 'tailwind-react-native-classnames';
 import axios from 'axios';
 import {CreateVisitorDTO} from 'clients';
 import {config} from '../../config';
+import RNPrint from 'react-native-print';
+import {Button} from 'react-native-elements';
 
 function LabelPreview({route, navigation}: {route: any; navigation: any}) {
     const {name, phone, email, organization, image} = route.params;
@@ -18,11 +20,42 @@ function LabelPreview({route, navigation}: {route: any; navigation: any}) {
             organization,
             image,
         };
-
+        const prepareHTML = () => {
+            return `
+                <html>
+                <head>
+                    <style>
+                        .label {
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            align-items: center;
+                            width: 80mm;  /* tilpasse ønsket størrelse */
+                            height: 40mm;  /* tilpasse ønsket størrelse */
+                            border: 1px solid black;
+                            padding: 10px;
+                            box-sizing: border-box;
+                            page-break-inside: avoid;  /* avoid page breaks inside the label */
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="label">
+                        <h3>Navn: ${name}</h3>
+                        <h3>${organization}</h3>
+                    </div>
+                </body>
+                </html>
+            `;
+        };
         axios
             .put('/Visit', requestBody)
             .then(response => {
                 console.log(response);
+                const html = prepareHTML();
+                RNPrint.print({
+                    html,
+                });
                 navigation.navigate('Home');
                 // Handle successful registration
             })
@@ -33,10 +66,11 @@ function LabelPreview({route, navigation}: {route: any; navigation: any}) {
     };
 
     return (
-        <View style={tw`flex-1 bg-gray-800 justify-start items-center p-5`}>
+        <View style={tw`flex-1 bg-gray-800 justify-start items-center p-8`}>
             <Text
                 style={[
                     tw`text-white text-center font-bold mt-10 mb-5`,
+                    {fontFamily: 'CircularStd-Medium'},
                     {fontSize: 20},
                 ]}>
                 Registered Information
@@ -44,16 +78,43 @@ function LabelPreview({route, navigation}: {route: any; navigation: any}) {
             <View style={tw`mb-5 flex-row`}>
                 <View style={tw`items-start w-1/2`}>
                     <Text style={tw`text-white text-left mb-1`}>
-                        <Text style={tw`font-bold`}>Name:</Text> {name}
+                        <Text
+                            style={[
+                                tw`font-bold`,
+                                {fontFamily: 'CircularStd-Medium'},
+                            ]}>
+                            Name:
+                        </Text>{' '}
+                        {name}
                     </Text>
                     <Text style={tw`text-white text-left mb-1`}>
-                        <Text style={tw`font-bold`}>Phone:</Text> {phone}
+                        <Text
+                            style={[
+                                tw`font-bold`,
+                                {fontFamily: 'CircularStd-Medium'},
+                            ]}>
+                            Phone:
+                        </Text>{' '}
+                        {phone}
                     </Text>
                     <Text style={tw`text-white text-left mb-1`}>
-                        <Text style={tw`font-bold`}>Email:</Text> {email}
+                        <Text
+                            style={[
+                                tw`font-bold`,
+                                {fontFamily: 'CircularStd-Medium'},
+                            ]}>
+                            Email:
+                        </Text>
+                        {email}
                     </Text>
                     <Text style={tw`text-white text-left mb-1`}>
-                        <Text style={tw`font-bold`}>Organization:</Text>{' '}
+                        <Text
+                            style={[
+                                tw`font-bold`,
+                                {fontFamily: 'CircularStd-Medium'},
+                            ]}>
+                            Organization:
+                        </Text>{' '}
                         {organization}
                     </Text>
                 </View>
@@ -65,10 +126,10 @@ function LabelPreview({route, navigation}: {route: any; navigation: any}) {
                     />
                 </View>
             </View>
-
             <Text
                 style={[
                     tw`text-white text-center font-bold mt-10 mb-5`,
+                    {fontFamily: 'CircularStd-Medium'},
                     {fontSize: 20},
                 ]}>
                 Label Preview
@@ -79,22 +140,25 @@ function LabelPreview({route, navigation}: {route: any; navigation: any}) {
                     {organization}
                 </Text>
             </View>
-
-            <View style={tw`mt-5`}>
-                <TouchableOpacity
-                    style={tw`bg-blue-500 p-3 mb-8 rounded`}
-                    onPress={() => navigation.goBack()}>
-                    <Text style={tw`text-white text-center`}>
-                        Change information
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={tw`bg-blue-500 p-3 rounded`}
-                    onPress={confirmAndPrint}>
-                    <Text style={tw`text-white text-center`}>
-                        Confirm and print
-                    </Text>
-                </TouchableOpacity>
+            <View style={tw`w-96`}>
+                <Button
+                    title="Change information"
+                    onPress={() => navigation.goBack()}
+                    buttonStyle={tw`bg-black py-4 mb-4 rounded-md w-full`}
+                    titleStyle={[
+                        tw`text-white text-center`,
+                        {fontFamily: 'CircularStd-Medium'},
+                    ]}
+                />
+                <Button
+                    title="Confirm and print"
+                    onPress={confirmAndPrint}
+                    buttonStyle={tw`bg-black py-4 rounded-md w-full`}
+                    titleStyle={[
+                        tw`text-white text-center`,
+                        {fontFamily: 'CircularStd-Medium'},
+                    ]}
+                />
             </View>
         </View>
     );

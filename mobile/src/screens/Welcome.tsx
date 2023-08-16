@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
+import tw from 'tailwind-react-native-classnames';
 
 function WelcomeScreen({navigation}: {navigation: any}) {
     return (
@@ -9,13 +10,23 @@ function WelcomeScreen({navigation}: {navigation: any}) {
                 className="w-64 h-10 mb-5 self-center" // adjust the width and height here
                 resizeMode="contain"
             />
-            <Text className="text-2xl text-white text-center mb-5">
+            <Text
+                style={[
+                    tw`text-white mb-4`,
+                    {fontFamily: 'CircularStd-Medium', fontSize: 30},
+                ]}>
                 Welcome to Miles!
             </Text>
             <TouchableOpacity
-                className="bg-black py-4 rounded-md w-full"
-                onPress={() => navigation.navigate('Registration')}>
-                <Text className="text-xl text-white text-center">Register</Text>
+                className="bg-black py-4 rounded-md w-96"
+                onPress={() => navigation.navigate('Photo')}>
+                <Text
+                    style={[
+                        tw`text-white text-center`,
+                        {fontFamily: 'CircularStd-Medium', fontSize: 23},
+                    ]}>
+                    Register
+                </Text>
             </TouchableOpacity>
         </View>
     );
