@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Login from './pages/login';
 import Home from './pages/home';
-import Calendar from './pages/calendar';
+
 import DashboardWrapper from './components/DashboardWrapper';
 import {SearchContext} from './components/common/SearchContext';
 
@@ -16,9 +16,6 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/" element={<DashboardWrapper />}>
                         <Route index element={<Home />} />
-                    </Route>
-                    <Route path="/calendar" element={<DashboardWrapper />}>
-                        <Route index element={<Calendar />} />
                     </Route>
                 </Routes>
             </Router>
