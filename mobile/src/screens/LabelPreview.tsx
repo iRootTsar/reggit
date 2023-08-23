@@ -20,34 +20,51 @@ function LabelPreview({route, navigation}: {route: any; navigation: any}) {
             organization,
             image,
         };
+
         const prepareHTML = () => {
             return `
                 <html>
                 <head>
                     <style>
+                        @page {
+                            size: 29mm 90mm; 
+                            margin: 0;
+                        }
+                        body {
+                            margin: 0;
+                            font-family: Arial, sans-serif; 
+                        }
                         .label {
                             display: flex;
-                            flex-direction: column;
-                            justify-content: center;
+                            flex-direction: row;
+
                             align-items: center;
-                            width: 80mm;  /* tilpasse ønsket størrelse */
-                            height: 40mm;  /* tilpasse ønsket størrelse */
-                            border: 1px solid black;
-                            padding: 10px;
-                            box-sizing: border-box;
-                            page-break-inside: avoid;  /* avoid page breaks inside the label */
+                            width: 29mm;  
+                            height: 90mm;
+                            padding: 2mm;  
+                        }
+                        .rotated-text {
+                            transform: rotate(270deg);
+                            white-space: nowrap;
+                            font-size: 32px;  // Increased font size
+                            line-height: 38px;  // Adjusted line-height for the larger font
+                            margin-left: 1mm;  // Reduced margin
+                        }
+                        .rotated-text:first-child {
+                            margin-right: 1mm;  // Reduced margin
                         }
                     </style>
                 </head>
                 <body>
                     <div class="label">
-                        <h3>Navn: ${name}</h3>
-                        <h3>${organization}</h3>
+                        <h3 class="rotated-text">${name}</h3>
+                        <h3 class="rotated-text">${organization}</h3>
                     </div>
                 </body>
                 </html>
             `;
         };
+
         axios
             .put('/Visit', requestBody)
             .then(response => {
@@ -134,9 +151,11 @@ function LabelPreview({route, navigation}: {route: any; navigation: any}) {
                 ]}>
                 Label Preview
             </Text>
-            <View style={styles.label}>
-                <Text style={tw`text-black text-center mb-1`}>{name}</Text>
-                <Text style={tw`text-black text-center mb-1`}>
+            <View style={[styles.label, tw`mb-10`]}>
+                <Text style={tw`text-black text-center mb-1 text-xl`}>
+                    {name}
+                </Text>
+                <Text style={tw`text-black text-center mb-1 text-xl`}>
                     {organization}
                 </Text>
             </View>
@@ -166,13 +185,22 @@ function LabelPreview({route, navigation}: {route: any; navigation: any}) {
 
 const styles = StyleSheet.create({
     label: {
-        borderWidth: 1,
-        borderColor: 'white',
-        padding: 10,
         borderRadius: 5,
         backgroundColor: 'white',
-        width: '80%',
-        marginBottom: 40, // More space between label and buttons
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 90 * 3.779528, // Convert mm to dp (1mm is approximately 3.779528 dp)
+        height: 29 * 3.779528,
+        padding: 2 * 3.779528,
+    },
+    text: {
+        fontSize: 20,
+        marginLeft: 2 * 3.779528,
+    },
+    textFirstChild: {
+        marginRight: 2 * 3.779528,
     },
 });
 

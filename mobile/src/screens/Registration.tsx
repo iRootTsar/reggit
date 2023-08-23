@@ -136,10 +136,10 @@ function Registration({route, navigation}: {navigation: any; route: any}) {
                             label="E-mail"
                             labelStyle={[
                                 tw`absolute left-2`,
-                                focused === 'E-mail' || formData.email
+                                focused === 'email' || formData.email
                                     ? tw`text-xs top-0`
                                     : tw`text-base top-1/3`,
-                                focused === 'E-mail'
+                                focused === 'email'
                                     ? tw`text-white`
                                     : tw`text-gray-500`,
                             ]}
@@ -149,10 +149,10 @@ function Registration({route, navigation}: {navigation: any; route: any}) {
                                 {fontFamily: 'CircularStd-Medium'},
                             ]}
                             placeholderTextColor="gray"
-                            onFocus={() => setFocused('E-mail')}
+                            onFocus={() => setFocused('email')}
                             onBlur={() => setFocused(null)}
                             onChangeText={value =>
-                                handleInputChange('E-mail', value)
+                                handleInputChange('email', value)
                             }
                         />
                         <Input

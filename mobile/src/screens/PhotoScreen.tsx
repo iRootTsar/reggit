@@ -49,6 +49,17 @@ function PhotoScreen({navigation, route}: {navigation: any; route: any}) {
                     />
                 </View>
             )}
+            <Button
+                title="Skip"
+                onPress={() =>
+                    navigation.navigate('Registration', {
+                        photo: null,
+                        formData: formDataFromParams,
+                    })
+                }
+                buttonStyle={tw`bg-black py-4 rounded-md w-96 mt-10`}
+                titleStyle={tw`text-white`}
+            />
         </View>
     );
 }
