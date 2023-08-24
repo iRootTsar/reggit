@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Image} from 'react-native';
+import {View, Image, PermissionsAndroid, Platform} from 'react-native';
 import tw from 'tailwind-react-native-classnames';
 import {Button} from 'react-native-elements';
 import {launchCamera, CameraOptions} from 'react-native-image-picker';
@@ -11,12 +11,39 @@ function PhotoScreen({navigation, route}: {navigation: any; route: any}) {
         let options: CameraOptions = {
             mediaType: 'photo',
             includeBase64: true,
+            cameraType: 'front',
         };
         launchCamera(options, response => {
             if (!response.didCancel && !response.errorCode && response.assets) {
                 setPhoto(response.assets[0]?.base64 || null);
             }
         });
+    };
+
+    const requestCameraPermission = async () => {
+        if (Platform.OS === 'android') {
+            try {
+                const granted = await PermissionsAndroid.request(
+                    PermissionsAndroid.PERMISSIONS.CAMERA,
+                    {
+                        title: 'App Camera Permission',
+                        message: 'App needs access to your camera',
+                        buttonNeutral: 'Ask Me Later',
+                        buttonNegative: 'Cancel',
+                        buttonPositive: 'OK',
+                    }
+                );
+                if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                    takePhoto();
+                } else {
+                    console.log('Camera permission denied');
+                }
+            } catch (err) {
+                console.warn(err);
+            }
+        } else if (Platform.OS === 'ios') {
+            takePhoto();
+        }
     };
 
     return (
@@ -29,7 +56,7 @@ function PhotoScreen({navigation, route}: {navigation: any; route: any}) {
             )}
             <Button
                 title={photo ? 'Retake Photo' : 'Take Photo'}
-                onPress={takePhoto}
+                onPress={requestCameraPermission}
                 buttonStyle={tw`bg-black py-4 rounded-md w-96`}
                 titleStyle={tw`text-white`}
             />
