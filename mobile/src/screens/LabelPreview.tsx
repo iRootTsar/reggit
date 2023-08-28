@@ -25,33 +25,38 @@ function LabelPreview({route, navigation}: {route: any; navigation: any}) {
             return `
                 <html>
                 <head>
+                    <meta name="viewport" content="width=device-width, initial-scale=1">
                     <style>
                         @page {
-                            size: 29mm 90mm; 
+                            size: 29mm 90mm landscape; 
                             margin: 0;
+                        }
+                        @media print {
+                            @page {
+                                size: 29mm 90mm landscape; 
+                            }
+                        }
+                        html {
+                            background-color: aliceblue;
                         }
                         body {
                             margin: 0;
-                            font-family: Arial, sans-serif; 
+                            font-family: Arial, sans-serif;
                         }
                         .label {
                             display: flex;
-                            flex-direction: row;
-
+                            flex-direction: column;
                             align-items: center;
-                            width: 29mm;  
-                            height: 90mm;
-                            padding: 2mm;  
+                            margin: 0px; 
+                            page-break-inside: avoid; // Legge til denne linjen
                         }
                         .rotated-text {
-                            transform: rotate(270deg);
-                            white-space: nowrap;
-                            font-size: 32px;  // Increased font size
-                            line-height: 38px;  // Adjusted line-height for the larger font
-                            margin-left: 1mm;  // Reduced margin
+                            align-content: center;
+                            font-size: 20px;
                         }
-                        .rotated-text:first-child {
-                            margin-right: 1mm;  // Reduced margin
+                        h3 {
+                            margin: 0px;
+                            margin-top: 1em;
                         }
                     </style>
                 </head>
@@ -65,21 +70,27 @@ function LabelPreview({route, navigation}: {route: any; navigation: any}) {
             `;
         };
 
-        axios
-            .put('/Visit', requestBody)
-            .then(response => {
-                console.log(response);
-                const html = prepareHTML();
-                RNPrint.print({
-                    html,
-                });
-                navigation.navigate('Home');
-                // Handle successful registration
-            })
-            .catch(error => {
-                console.log(error);
-                // Handle failed registration
-            });
+        //Fikset, nå lagres ikek før det blir printa
+        const html = prepareHTML();
+        RNPrint.print({html, isLandscape: false});
+        // .then(() => {
+        //     // gi beskejd at printingen gikk
+        //     axios
+        //         .put('/Visit', requestBody)
+        //         .then(response => {
+        //             console.log(response);
+        //             navigation.navigate('Home');
+        //             // vellyket registrering
+        //         })
+        //         .catch(error => {
+        //             console.log(error);
+        //             // behandle feil ved registrering
+        //         });
+        // })
+        // .catch(error => {
+        //     // Kjøre denne linjen hvis det skjedde feil ved printing
+        //     console.error('Printing error:', error);
+        // });
     };
 
     return (
