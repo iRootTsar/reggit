@@ -57,6 +57,17 @@ tunnels:
     subdomain: "subdomain name 3" 
 ```
 
+4. Ensure your Brother Printer (QL-810W/810Wc) is properly set up and connected to the same network. Prepare your template and transfer it to your printer using Transfer Express. The template file should be in .lbx format.
+
+You can transfer the template by downloading the P-touch Editor 5.x from Brother's official website.
+
+Note: Template transfer to the printer is currently supported only on Windows. MacOS is yet to offer this capability.
+
+Project Directories:
+- P-Touch contains the objects to be created.
+- Server establishes the TCP socket connection to the printer. You can set the printer IP address and specify the number of print copies per request here.
+- .NET within VisitController handles the API call to print.
+
 ## Run
 
 All commands to run can be run from project root folder, check package.json in project root folder.
@@ -80,14 +91,39 @@ To run whole project seperate terminals run `yarn run ngrok` then `yarn run-all`
 
 In case you have an ANdroid tablet connect it with usb to the computer and run `npx react-native run-android --deviceId=#########` replace ##### wit hdevice ID
 
-For IOS you can run build on XCode and choose device after settign it up first time if device is on network you can run it remotely
-by typing i and a in terimanl after `yarn run-all` command this should start building and bundling application on devices.
+For iOS, after the initial setup in XCode, if the device is on the same network as your PC, remotely run the app by pressing i (iOS) or a (Android) in 
+the terminal after the `yarn run-all` command.
 
+
+In case of any issues, refer to the troubleshooting steps below to clean various parts of your project and rebuild:
+
+1. Cleaning Node Modules from root directory
+``` rm -rf node_modules/
+yarn install
+```
+2. Cleaning metro bundler cache
+```yarn start --reset-cache
+```
+3. Cleaning .NET projects 
+```cd api
+dotnet clean
+```
+4. Cleaning CocoaPods for IOS
+```cd mobile/ios
+pod deintegrate
+pod cache clean --all
+pod install
+```
+5. Cleaning Gradle for Android
+```cd mobile/android
+./gradlew clean
+```
+Then you can try rebuilding project by running `yarn run ngrok`and `yarn run-all` in separate terminals
 
 ## Contribution
 
-Tor-Inge Jenssen og Caroline Gannefors as Project leaders.
-Øystein Vikene og Vladimirs Civilgins as developers.
+Tor-Inge Jenssen and Caroline Gannefors as Project leaders.
+Øystein Vikene and Vladimirs Civilgins as developers.
 
 ## Testing
 
