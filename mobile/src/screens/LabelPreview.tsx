@@ -4,7 +4,6 @@ import tw from 'tailwind-react-native-classnames';
 import axios from 'axios';
 import {CreateVisitorDTO} from 'clients';
 import {config} from '../../config';
-import RNPrint from 'react-native-print';
 import {Button} from 'react-native-elements';
 
 function LabelPreview({route, navigation}: {route: any; navigation: any}) {
@@ -12,7 +11,7 @@ function LabelPreview({route, navigation}: {route: any; navigation: any}) {
 
     axios.defaults.baseURL = config.ngrokDomain;
 
-    const confirmAndPrint = () => {
+    const confirmAndPrint = async () => {
         const requestBody: CreateVisitorDTO = {
             name,
             email,
@@ -21,76 +20,16 @@ function LabelPreview({route, navigation}: {route: any; navigation: any}) {
             image,
         };
 
-        const prepareHTML = () => {
-            return `
-                <html>
-                <head>
-                    <meta name="viewport" content="width=device-width, initial-scale=1">
-                    <style>
-                        @page {
-                            size: 29mm 90mm landscape; 
-                            margin: 0;
-                        }
-                        @media print {
-                            @page {
-                                size: 29mm 90mm landscape; 
-                            }
-                        }
-                        html {
-                            background-color: aliceblue;
-                        }
-                        body {
-                            margin: 0;
-                            font-family: Arial, sans-serif;
-                        }
-                        .label {
-                            display: flex;
-                            flex-direction: column;
-                            align-items: center;
-                            margin: 0px; 
-                            page-break-inside: avoid; // Legge til denne linjen
-                        }
-                        .rotated-text {
-                            align-content: center;
-                            font-size: 20px;
-                        }
-                        h3 {
-                            margin: 0px;
-                            margin-top: 1em;
-                        }
-                    </style>
-                </head>
-                <body>
-                    <div class="label">
-                        <h3 class="rotated-text">${name}</h3>
-                        <h3 class="rotated-text">${organization}</h3>
-                    </div>
-                </body>
-                </html>
-            `;
-        };
+        try {
+            // If the printing request was successful, add the person to the database
+            await axios.put('/Visit', requestBody);
 
-        //Fikset, nå lagres ikek før det blir printa
-        const html = prepareHTML();
-        RNPrint.print({html, isLandscape: false});
-        // .then(() => {
-        //     // gi beskejd at printingen gikk
-        //     axios
-        //         .put('/Visit', requestBody)
-        //         .then(response => {
-        //             console.log(response);
-        //             navigation.navigate('Home');
-        //             // vellyket registrering
-        //         })
-        //         .catch(error => {
-        //             console.log(error);
-        //             // behandle feil ved registrering
-        //         });
-        // })
-        // .catch(error => {
-        //     // Kjøre denne linjen hvis det skjedde feil ved printing
-        //     console.error('Printing error:', error);
-        // });
+            // Print request and database update completed
+            navigation.navigate('Home');
+        } catch (error) {
+            console.error('Printing error:', error);
+            // Handle the error here (e.g., show an error message to the user)
+        }
     };
 
     return (
@@ -163,12 +102,26 @@ function LabelPreview({route, navigation}: {route: any; navigation: any}) {
                 Label Preview
             </Text>
             <View style={[styles.label, tw`mb-10`]}>
-                <Text style={tw`text-black text-center mb-1 text-xl`}>
+                <Text
+                    style={[
+                        tw`text-black text-center mb-1 text-xl font-bold`,
+                        // {fontFamily: 'Helsinki'},
+                        // {fontSize: 20},
+                    ]}>
                     {name}
                 </Text>
-                <Text style={tw`text-black text-center mb-1 text-xl`}>
+                <Text
+                    style={[
+                        tw`text-black text-center mb-1 text-xs`,
+                        // {fontFamily: 'Helsinki'},
+                        // {fontSize: 10},
+                    ]}>
                     {organization}
                 </Text>
+                <Image
+                    source={require('../images/mileslogo.png')}
+                    style={styles.image}
+                />
             </View>
             <View style={tw`w-96`}>
                 <Button
@@ -203,7 +156,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         width: 90 * 3.779528, // Convert mm to dp (1mm is approximately 3.779528 dp)
-        height: 29 * 3.779528,
+        height: 23 * 3.779528,
         padding: 2 * 3.779528,
     },
     text: {
@@ -212,6 +165,16 @@ const styles = StyleSheet.create({
     },
     textFirstChild: {
         marginRight: 2 * 3.779528,
+    },
+    labelContent: {
+        flex: 1,
+    },
+    image: {
+        position: 'absolute',
+        bottom: 7,
+        left: 10,
+        width: 30, // Adjust the width as needed
+        height: 30, // Adjust the height as needed
     },
 });
 

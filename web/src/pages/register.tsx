@@ -13,12 +13,12 @@ function Register() {
                     className="w-64 h-15"
                 />
                 <p className="text-white font-medium text-4xl">
-                    Welcome to Miles!
+                    Velkommen til Miles!
                 </p>
                 <button
                     className="bg-black py-4 rounded-md w-96 text-center text-white font-medium text-2xl"
                     onClick={() => navigate('/photoscreen')}>
-                    Register
+                    Registrer
                 </button>
             </div>
         </div>

@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\dal\reggit.dal.csproj" />
+    <ProjectReference Include="..\PTouch\P-touch.net.csproj" />
   </ItemGroup>
 
 </Project>

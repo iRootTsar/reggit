@@ -1,12 +1,12 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {
     View,
-    Alert,
     KeyboardAvoidingView,
     Platform,
     ScrollView,
     Keyboard,
     TextInput,
+    Text,
 } from 'react-native';
 import tw from 'tailwind-react-native-classnames';
 import {Input, Button} from 'react-native-elements';
@@ -16,7 +16,7 @@ function Registration({route, navigation}: {navigation: any; route: any}) {
     const initialFormDataFromRoute = route.params?.formData;
     const [focused, setFocused] = useState<string | null>(null);
 
-    //UseStae initail form
+    // UseState initial form
     const [formData, setFormData] = useState(
         initialFormDataFromRoute || {
             name: '',
@@ -26,25 +26,99 @@ function Registration({route, navigation}: {navigation: any; route: any}) {
         }
     );
 
+    const [fieldErrors, setFieldErrors] = useState({
+        name: '',
+        email: '',
+        phone: '',
+        organization: '',
+    });
+
+    //Handle input changes in real time for smooth user experience
     const handleInputChange = (name: string, value: string) => {
         setFormData((prevState: any) => ({
             ...prevState,
             [name]: value,
         }));
-    };
 
-    const register = () => {
-        if (!formData.name || !formData.organization || !initialPhoto) {
-            Alert.alert(
-                'Error',
-                'Photo, Name, and Organization are mandatory fields.'
-            );
-            return;
+        // Validate in real-time
+        const errors: any = {...fieldErrors};
+
+        if (name === 'name') {
+            if (!/^[a-zA-Z\s-]*$/.test(value)) {
+                errors.name = 'Kun inneholde bokstav, bindestrek og mellomrom';
+            } else if (value.length > 20) {
+                errors.name = 'Navn må være 20 tegn eller mindre';
+            } else {
+                errors.name = '';
+            }
         }
-        navigation.navigate('LabelPreview', {...formData, image: initialPhoto});
+
+        if (name === 'phone') {
+            if (!/^\d{0,8}$/.test(value)) {
+                errors.phone = 'Telefonnummer kan innehodle opp til 8 siffer';
+            } else {
+                errors.phone = '';
+            }
+        }
+
+        if (name === 'email') {
+            if (value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+                errors.email = 'Ugyldig e-postformat';
+            } else {
+                errors.email = '';
+            }
+        }
+
+        if (name === 'organization') {
+            errors.organization = '';
+        }
+
+        setFieldErrors(errors);
     };
 
-    //Here i try to fix the focus on field keyboard problem on Android
+    // Upon clickign next to jump to labelpreview screen
+    const register = () => {
+        const errors: any = {};
+
+        // Validation check
+        if (!formData.name) {
+            errors.name = '*Obligatorisk felt';
+        }
+
+        if (!formData.organization) {
+            errors.organization = '*Obligatorisk felt';
+        }
+
+        if (!/^[a-zA-Z\s-]*$/.test(formData.name)) {
+            errors.name =
+                'Navn kan kun inneholde bokstav, bindestrek og mellomrom';
+        } else if (formData.name.length > 20) {
+            errors.name = 'Navn må være 20 tegn elelr mindre';
+        }
+
+        if (formData.phone && !/^\d{0,8}$/.test(formData.phone)) {
+            errors.phone = 'Telefonnummer kan innehodle opp til 8 siffer';
+        }
+
+        if (
+            formData.email &&
+            !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)
+        ) {
+            errors.email = 'Invalid email format.';
+        }
+
+        setFieldErrors(errors);
+
+        // Check if there are any errors
+        if (Object.keys(errors).length === 0) {
+            navigation.navigate('LabelPreview', {
+                ...formData,
+                image: initialPhoto,
+            });
+        }
+    };
+
+    // Here i try to fix the focus on field keyboard problem on Android
     const nameRef = useRef<TextInput | null>(null);
     const phoneRef = useRef<TextInput | null>(null);
     const emailRef = useRef<TextInput | null>(null);
@@ -62,7 +136,7 @@ function Registration({route, navigation}: {navigation: any; route: any}) {
     }, []);
 
     const handleKeyboardDidHide = () => {
-        nameRef.current && nameRef.current.blur(); //dont know hwy it shows that here is error but code works only with blur on
+        nameRef.current && nameRef.current.blur();
         phoneRef.current && phoneRef.current.blur();
         emailRef.current && emailRef.current.blur();
         organizationRef.current && organizationRef.current.blur();
@@ -79,9 +153,9 @@ function Registration({route, navigation}: {navigation: any; route: any}) {
                     style={tw`flex-1 bg-gray-800 items-center justify-center p-5`}>
                     <View style={tw`w-96`}>
                         <Input
-                            ref={nameRef} //need this to avoid field focus when no keyboard is present on Android
-                            value={formData.name} //Saved state if we wanan jump from oen window to anotehr
-                            label="Name*"
+                            ref={nameRef}
+                            value={formData.name}
+                            label="Navn*"
                             labelStyle={[
                                 tw`absolute left-2`,
                                 focused === 'name' || formData.name
@@ -103,11 +177,16 @@ function Registration({route, navigation}: {navigation: any; route: any}) {
                                 handleInputChange('name', value)
                             }
                         />
+                        {fieldErrors.name && (
+                            <Text style={tw`text-red-500 text-xs mt-1`}>
+                                {fieldErrors.name}
+                            </Text>
+                        )}
 
                         <Input
                             ref={phoneRef}
                             value={formData.phone}
-                            label="Phone"
+                            label="Tlf.nr"
                             labelStyle={[
                                 tw`absolute left-2`,
                                 focused === 'phone' || formData.phone
@@ -130,6 +209,12 @@ function Registration({route, navigation}: {navigation: any; route: any}) {
                                 handleInputChange('phone', value)
                             }
                         />
+                        {fieldErrors.phone && (
+                            <Text style={tw`text-red-500 text-xs mt-1`}>
+                                {fieldErrors.phone}
+                            </Text>
+                        )}
+
                         <Input
                             ref={emailRef}
                             value={formData.email}
@@ -155,10 +240,16 @@ function Registration({route, navigation}: {navigation: any; route: any}) {
                                 handleInputChange('email', value)
                             }
                         />
+                        {fieldErrors.email && (
+                            <Text style={tw`text-red-500 text-xs mt-1`}>
+                                {fieldErrors.email}
+                            </Text>
+                        )}
+
                         <Input
                             ref={organizationRef}
                             value={formData.organization}
-                            label="Organization*"
+                            label="Organisasjon*"
                             labelStyle={[
                                 tw`absolute left-2`,
                                 focused === 'organization' ||
@@ -181,9 +272,15 @@ function Registration({route, navigation}: {navigation: any; route: any}) {
                                 handleInputChange('organization', value)
                             }
                         />
+                        {fieldErrors.organization && (
+                            <Text style={tw`text-red-500 text-xs mt-1`}>
+                                {fieldErrors.organization}
+                            </Text>
+                        )}
+
                         <View style={tw`mt-4`} />
                         <Button
-                            title="Next"
+                            title="Neste"
                             onPress={register}
                             buttonStyle={tw`bg-black py-4 rounded-md w-full`}
                             titleStyle={[
@@ -193,7 +290,7 @@ function Registration({route, navigation}: {navigation: any; route: any}) {
                         />
                         <View style={tw`mt-4`} />
                         <Button
-                            title="Change picture"
+                            title="Ta bilde på nytt"
                             onPress={() =>
                                 navigation.navigate('Photo', {formData})
                             }

@@ -15,7 +15,7 @@ function WelcomeScreen({navigation}: {navigation: any}) {
                     tw`text-white mb-4`,
                     {fontFamily: 'CircularStd-Medium', fontSize: 30},
                 ]}>
-                Welcome to Miles!
+                Velkommen til Miles!
             </Text>
             <TouchableOpacity
                 className="bg-black py-4 rounded-md w-96"
@@ -25,7 +25,7 @@ function WelcomeScreen({navigation}: {navigation: any}) {
                         tw`text-white text-center`,
                         {fontFamily: 'CircularStd-Medium', fontSize: 23},
                     ]}>
-                    Register
+                    Registrer
                 </Text>
             </TouchableOpacity>
         </View>
