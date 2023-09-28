@@ -13,8 +13,15 @@ import {Input, Button} from 'react-native-elements';
 
 function Registration({route, navigation}: {navigation: any; route: any}) {
     const initialPhoto = route.params?.photo;
+    const [photo, setPhoto] = useState(initialPhoto);
     const initialFormDataFromRoute = route.params?.formData;
     const [focused, setFocused] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (route.params?.photo) {
+            setPhoto(route.params.photo);
+        }
+    }, [route.params?.photo]);
 
     // UseState initial form
     const [formData, setFormData] = useState(
@@ -113,7 +120,7 @@ function Registration({route, navigation}: {navigation: any; route: any}) {
         if (Object.keys(errors).length === 0) {
             navigation.navigate('LabelPreview', {
                 ...formData,
-                image: initialPhoto,
+                image: route.params?.photo,
             });
         }
     };
@@ -292,7 +299,10 @@ function Registration({route, navigation}: {navigation: any; route: any}) {
                         <Button
                             title="Ta bilde på nytt"
                             onPress={() =>
-                                navigation.navigate('Photo', {formData})
+                                navigation.navigate('Photo', {
+                                    formData,
+                                    photo: photo,
+                                })
                             }
                             buttonStyle={tw`bg-black py-4 mb-4 rounded-md w-full`}
                             titleStyle={[

@@ -52,12 +52,25 @@ This is mostly used for android app when run with the command below.
 
 Android: `yarn android`
 
-iOS: `yarn ios` or `yarn ios-pro` for 14 pro
+iOS: `yarn ios` or `yarn ios-pro` for 14 pro (dont forget to downlaod Android studio and XCode and set them up appropriately)
 
 Web: `yarn start`
 
+To run whole project seperate terminals run `yarn run ngrok` then `yarn run-all` 
+
+In case you have an ANdroid tablet connect it with usb to the computer and run `npx react-native run-android --deviceId=#########` replace ##### wit hdevice ID
+
+For IOS you can run build on XCode and choose device after settign it up first time if device is on network you can run it remotely
+by typing i and a in terimanl after `yarn run-all` command this should start building and bundling application on devices.
+
+
 ## Contribution
 
+Tor-Inge Jenssen og Caroline Gannefors som prosjektledere.
+Øystein Vikene og Vladimirs Civilgins som utviklere
+
 ## Testing
+
+
 
 ## License
