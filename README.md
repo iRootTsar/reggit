@@ -102,7 +102,8 @@ In case of any issues, refer to the troubleshooting steps below to clean various
 yarn install
 ```
 2. Cleaning metro bundler cache
-``` yarn start --reset-cache
+``` 
+yarn start --reset-cache
 ```
 3. Cleaning .NET projects 
 ``` cd api
