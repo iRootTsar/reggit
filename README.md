@@ -102,20 +102,20 @@ In case of any issues, refer to the troubleshooting steps below to clean various
 yarn install
 ```
 2. Cleaning metro bundler cache
-```yarn start --reset-cache
+``` yarn start --reset-cache
 ```
 3. Cleaning .NET projects 
-```cd api
+``` cd api
 dotnet clean
 ```
 4. Cleaning CocoaPods for IOS
-```cd mobile/ios
+``` cd mobile/ios
 pod deintegrate
 pod cache clean --all
 pod install
 ```
 5. Cleaning Gradle for Android
-```cd mobile/android
+``` cd mobile/android
 ./gradlew clean
 ```
 Then you can try rebuilding project by running `yarn run ngrok`and `yarn run-all` in separate terminals
