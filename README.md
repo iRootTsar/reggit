@@ -37,6 +37,25 @@ subdomain: DOMAIN_NAME"
 
 Add a .env file in mobile `NGROK_DOMAIN = "NGROK_DOMAIN_ADRESS"`
 
+Add a ngrok.yml in root directory
+
+``` version: 2
+region: eu
+authtoken: "your token"
+tunnels:
+  api:
+    addr: 5101
+    proto: http
+    subdomain: "subdomain name 1"
+  web:
+    addr: 3000
+    proto: http
+    subdomain: "subdomain name 2"
+  printer:
+    addr: 3030
+    proto: http
+    subdomain: "subdomain name 3"```
+
 ## Run
 
 All commands to run can be run from project root folder, check package.json in project root folder.
@@ -66,8 +85,8 @@ by typing i and a in terimanl after `yarn run-all` command this should start bui
 
 ## Contribution
 
-Tor-Inge Jenssen og Caroline Gannefors som prosjektledere.
-Øystein Vikene og Vladimirs Civilgins som utviklere
+Tor-Inge Jenssen og Caroline Gannefors as Project leaders.
+Øystein Vikene og Vladimirs Civilgins as developers.
 
 ## Testing
 
