@@ -54,7 +54,8 @@ tunnels:
   printer:
     addr: 3030
     proto: http
-    subdomain: "subdomain name 3" ```
+    subdomain: "subdomain name 3" 
+```
 
 ## Run
 
